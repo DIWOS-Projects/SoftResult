@@ -6,7 +6,7 @@
         <Version>1.4.8.1</Version>
         <Authors>Artem Konkin, Ekaterina Volodina</Authors>
         <Company>Salyk Service</Company>
-        <Description>Добавлен функционал</Description>
+        <Description>1.4.8.1</Description>
         <PackageTags>SoftResult;Lib;Nugget</PackageTags>
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -14,6 +14,14 @@
         <IsPackable>true</IsPackable>
         <EnableDefaultStaticWebAssets>false</EnableDefaultStaticWebAssets>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Soft Result</Title>
+        <Copyright>DIWOS</Copyright>
+        <PackageProjectUrl>https://github.com/DIWOS-Projects/soft-result</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/DIWOS-Projects/soft-result/blob/dev/LICENSE</PackageLicenseUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/DIWOS-Projects/soft-result</RepositoryUrl>
+        <RepositoryType>Github</RepositoryType>
+        <PackageReleaseNotes>1.4.8.1</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,6 +31,13 @@
       <Content Include="..\README.md">
         <Link>README.md</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>
