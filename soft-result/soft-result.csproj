@@ -27,6 +27,11 @@
         <PackageReleaseNotes>1.4.8.1</PackageReleaseNotes>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <DebugType>portable</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
     <ItemGroup>
       <Content Include="..\.gitignore">
         <Link>.gitignore</Link>
