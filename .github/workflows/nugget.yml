@@ -73,7 +73,7 @@ jobs:
 
       # Validate metadata and content of the NuGet package
       - name: Validate package
-        run: meziantou.validate-nuget-package (Get-ChildItem "${{ env.NuGetDirectory }}/*.snupkg")
+        run: meziantou.validate-nuget-package (Get-ChildItem "${{ env.NuGetDirectory }}/*.nupkg")
 
   run_test:
     runs-on: ubuntu-latest
