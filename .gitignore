@@ -1,0 +1,9 @@
+
+.idea/
+.bin/
+.vs/
+*.suo
+*.vsidx
+.vscode/
+soft-result/obj/
+soft-result/bin/
