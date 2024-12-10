@@ -18,9 +18,13 @@
         <Copyright>DIWOS</Copyright>
         <PackageProjectUrl>https://github.com/DIWOS-Projects/soft-result</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/DIWOS-Projects/soft-result/blob/dev/LICENSE</PackageLicenseUrl>
+        <PackageLicenseExpression>LICENSE</PackageLicenseExpression>
         <PackageIcon>icon.png</PackageIcon>
         <RepositoryUrl>https://github.com/DIWOS-Projects/soft-result</RepositoryUrl>
         <RepositoryType>Github</RepositoryType>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageReleaseNotes>1.4.8.1</PackageReleaseNotes>
     </PropertyGroup>
 
