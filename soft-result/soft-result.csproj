@@ -17,14 +17,13 @@
         <Title>Soft Result</Title>
         <Copyright>DIWOS</Copyright>
         <PackageProjectUrl>https://github.com/DIWOS-Projects/soft-result</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/DIWOS-Projects/soft-result/blob/dev/LICENSE</PackageLicenseUrl>
         <PackageLicenseExpression>LICENSE</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>icon.png</PackageIcon>
         <RepositoryUrl>https://github.com/DIWOS-Projects/soft-result</RepositoryUrl>
         <RepositoryType>Github</RepositoryType>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageReleaseNotes>1.4.8.1</PackageReleaseNotes>
     </PropertyGroup>
 
@@ -34,6 +33,7 @@
       </Content>
       <Content Include="..\README.md">
         <Link>README.md</Link>
+          <PackagePath></PackagePath>
       </Content>
     </ItemGroup>
 
