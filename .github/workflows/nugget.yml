@@ -42,7 +42,7 @@ jobs:
 
     # Create the NuGet package in the folder from the environment variable NuGetDirectory
     - name: Pack NuGet
-      run: dotnet pack --configuration Release --output ${{ env.NuGetDirectory }}
+      run: dotnet pack --configuration Release --include-symbols --output ${{ env.NuGetDirectory }}
 
     # Publish the NuGet package as an artifact, so it can be used in the following jobs
     - uses: actions/upload-artifact@v3
