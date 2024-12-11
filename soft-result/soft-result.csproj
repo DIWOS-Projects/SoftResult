@@ -18,7 +18,6 @@
         <Copyright>DIWOS</Copyright>
         <PackageProjectUrl>https://github.com/DIWOS-Projects/soft-result</PackageProjectUrl>
         <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>icon.png</PackageIcon>
         <RepositoryUrl>https://github.com/DIWOS-Projects/soft-result</RepositoryUrl>
