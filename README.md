@@ -1,95 +1,94 @@
-
 ---
 
 # 🎯 **SoftResult**
 
 ![logo.png](logo.png)
 
-## 📋 **Информация о библиотеке**
+## 📋 **Library Information**
 
-- **Тип:**          Библиотека для API  
-- **Фреймворк:**    .NET 8  
-- **Зависимости:**  _Отсутствуют (легковесная библиотека)_  
-
----
-
-## ⚙️ **Назначение библиотеки**  
-
-SoftResult — это универсальная библиотека для формирования стандартных API-ответов в ASP.NET Core. Основные задачи:  
-- 🔄 Формирование ответов в формате `IResult`, унаследованного от `IActionResult`.  
-- 📦 Упрощение обработки HTTP-ответов в контроллерах, сервисах и медиаторе.  
-- 🔧 Унификация API-ответов для обеспечения простоты и удобства взаимодействия.  
+- **Type:**          API Library  
+- **Framework:**     .NET 8  
+- **Dependencies:**  _None (lightweight library)_  
 
 ---
 
-## 🚀 **Шаги для запуска**
+## ⚙️ **Purpose of the Library**  
 
-1. 🛠️ Убедитесь, что у вас установлена среда разработки для **.NET 8**.  
-2. Выполните следующие команды для сборки и публикации пакета:  
+SoftResult is a universal library for generating standardized API responses in ASP.NET Core. Its primary goals include:  
+- 🔄 Wrapping API responses in `IResult`, derived from `IActionResult`.  
+- 📦 Simplifying HTTP response handling in controllers, services, and Mediator.  
+- 🔧 Providing a unified API response format for easier client and server interaction.  
 
-### **🔧 Сборка пакета**
+---
+
+## 🚀 **Setup Instructions**
+
+1. 🛠️ Ensure that you have the **.NET 8** development environment installed.  
+2. Run the following commands to build and publish the package:  
+
+### **🔧 Build the Package**
 ```shell
 dotnet build -c Release
 ```
 
-### **📦 Создание локального источника пакетов**
+### **📦 Create a Local Package Source**
 ```shell
 mkdir /LocalNugget
 ```
 
-### **📤 Публикация пакета в локальный источник**
+### **📤 Publish the Package to a Local Source**
 ```shell
 dotnet nuget push .\soft-result\bin\Release\soft-result.1.4.8.1.nupkg --source C:\LocalNugget\
 ```
 
-### **🌐 Публикация пакета в удаленный источник**
+### **🌐 Publish the Package to a Remote Source**
 ```shell
 dotnet nuget push .\soft-result\bin\Release\soft-result.1.4.8.1.nupkg --api-key YOUR_API_KEY --source https://packages.salyk.kg/nuget
 ```
 
-### **➕ Добавление локального источника в NuGet**
+### **➕ Add a Local Source to NuGet**
 ```shell
 dotnet nuget add source C:\LocalNugget\ --name LocalNuggetSource
 ```
 
-### **🔍 Проверка локальных источников**
+### **🔍 View Local Sources**
 ```shell
 dotnet nuget list source
 ```
 
-### **📥 Добавление пакета в проект**
+### **📥 Add the Package to a Project**
 ```shell
 dotnet add package soft-result --source LocalNuggetSource
 ```
 
 ---
 
-## 🌟 **Базовые сценарии использования**
+## 🌟 **Key Use Cases**
 
-1. **🔄 Универсальные API-ответы:**  
-   Все ответы оборачиваются в `IResult`, позволяя легко обработать:  
-   - 📝 Сообщение (`Message`),  
-   - 📦 Полезную нагрузку (`Value`),  
-   - ❗ Ошибки (`Errors`),  
-   - 📋 HTTP-статус (`Status`).  
+1. **🔄 Universal API Responses:**  
+   All API responses are wrapped in `IResult`, allowing for consistent processing of:  
+   - 📝 Message (`Message`),  
+   - 📦 Payload (`Value`),  
+   - ❗ Errors (`Errors`),  
+   - 📋 HTTP Status (`Status`).  
 
-2. **📡 Работа с HTTP-запросами:**  
-   Используется для формирования ответов внутри компонентов системы, а не только в контроллерах.  
+2. **📡 Working with HTTP Requests:**  
+   Use the library for generating responses within system components, not just controllers.  
 
-3. **⚙️ Интеграция с контроллерами:**  
-   Универсальный механизм возврата ответов через `IResult:IActionResult`.  
+3. **⚙️ Controller Integration:**  
+   Unified response mechanism through `IResult:IActionResult`.  
 
-4. **📜 CQRS и MediatR:**  
-   Формирование универсальных ответов в командах и запросах, которые возвращают `IResult`, упрощая работу с Mediator.  
+4. **📜 CQRS and MediatR:**  
+   Simplify handling in commands and queries by returning `IResult`, making Mediator workflows more seamless.  
 
-5. **🔧 Поддержка сервисов:**  
-   Методы сервисов возвращают `IResult`, обеспечивая гибкость обработки статуса выполнения и сообщений.  
+5. **🔧 Service Integration:**  
+   Service methods return `IResult`, ensuring flexibility in status handling and error messaging.  
 
 ---
 
-## 💻 **Пример использования**
+## 💻 **Example Usage**
 
-### **📜 Query, возвращающий `IResult`**
+### **📜 Query Returning `IResult`**
 ```csharp
 using MediatR;
 using WebApi.Application.Interfaces;
@@ -116,13 +115,13 @@ public class GetSystemTypesQueryHandler(
         }
 
         return result.Any()
-            ? Result<List<SystemTypesDictionaryEntity>>.Ok("✅ Список систем получен", result)
-            : Result<List<SystemTypesDictionaryEntity>>.NotFound("❌ Не удалось найти список систем");
+            ? Result<List<SystemTypesDictionaryEntity>>.Ok("✅ System list retrieved successfully", result)
+            : Result<List<SystemTypesDictionaryEntity>>.NotFound("❌ No systems found");
     }
 }
 ```
 
-### **⚙️ Метод контроллера, возвращающий `IActionResult`**
+### **⚙️ Controller Method Returning `IActionResult`**
 ```csharp
 [HttpGet("get-system-types")]
 [Auth([Policies.ForAllPositions])]
@@ -133,33 +132,33 @@ public async Task<IActionResult> GetSystemTypes([FromQuery] GetSystemTypesQuery 
 }
 ```
 
-**💡 Обратите внимание:**  
-Контроллер напрямую возвращает результат из `Query`, так как `IResult` унаследован от `IActionResult`.  
+**💡 Note:**  
+The controller can directly return the result from the `Query` since `IResult` inherits from `IActionResult`.  
 
 ---
 
-## 📦 **Версионирование пакета**
+## 📦 **Package Versioning**
 
 - **soft-result: 1.4.8.1**  
-  - **1:** Глобальная версия.  
-  - **4:** Последняя цифра года — 2024.  
-  - **8:** Версия .NET.  
-  - **1:** Инкрементальная версия (увеличивается с каждым релизом).  
+  - **1:** Major version.  
+  - **4:** Last digit of the year — 2024.  
+  - **8:** .NET version.  
+  - **1:** Incremental version (increased with each release).  
 
 ---
 
-## 🎯 **Почему SoftResult?**
+## 🎯 **Why Choose SoftResult?**
 
-- 📋 **Единый формат ответов:** Простота обработки на клиентской стороне.  
-- 🚀 **Удобство интеграции:** Подходит для работы с MediatR, контроллерами и сервисами.  
-- 🔄 **Гибкость:** Легкая адаптация к требованиям проекта.  
-- 📜 **Соответствие стандартам:** Поддержка RFC 7807 для описания ошибок.  
+- 📋 **Consistent API Responses:** Simplifies client-side processing.  
+- 🚀 **Easy Integration:** Works seamlessly with Mediator, controllers, and services.  
+- 🔄 **Flexible:** Easily adapts to project-specific requirements.  
+- 📜 **Standards Compliant:** Supports RFC 7807 for error descriptions.  
 
 ---
 
-## 🌐 **Пакет в NuGet**
+## 🌐 **NuGet Package**
 ![nuggetScreenShot.png](nuggetScreenShot.png)
 
 ---
 
-Попробуйте **SoftResult** и сделайте ваш API стандартизированным, простым и удобным для использования! 🎉
+Try **SoftResult** today to make your API standardized, simple, and efficient! 🎉
