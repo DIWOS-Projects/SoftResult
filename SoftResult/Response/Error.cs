@@ -1,7 +1,7 @@
-﻿using soft_result.Extensions;
-using soft_result.Interfaces;
+﻿using SoftResult.Extensions;
+using SoftResult.Interfaces;
 
-namespace soft_result.Response;
+namespace SoftResult.Response;
 
 /// <summary>
 /// Ошибка

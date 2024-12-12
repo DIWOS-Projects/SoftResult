@@ -1,4 +1,4 @@
-﻿namespace soft_result.Enums;
+﻿namespace SoftResult.Enums;
 
 /// <summary>
 /// Перечисление локализации для указания языка сообщений результатов

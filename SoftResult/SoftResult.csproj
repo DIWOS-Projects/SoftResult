@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>soft_result</RootNamespace>
+        <RootNamespace>SoftResult</RootNamespace>
         <Version>1.4.8.1</Version>
         <Authors>Artem Konkin, Ekaterina Volodina</Authors>
         <Company>Salyk Service</Company>

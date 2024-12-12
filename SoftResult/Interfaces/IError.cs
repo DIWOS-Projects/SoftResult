@@ -1,4 +1,4 @@
-﻿namespace soft_result.Interfaces;
+﻿namespace SoftResult.Interfaces;
 
 /// <summary>
 /// Интерфейс ошибки

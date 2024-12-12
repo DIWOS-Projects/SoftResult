@@ -1,4 +1,4 @@
-﻿namespace soft_result.Extensions;
+﻿namespace SoftResult.Extensions;
 
 /// <summary>
 /// Класс расширений для обработки сообщений и метаданных результатов

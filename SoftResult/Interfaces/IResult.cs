@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using soft_result.Enums;
+using SoftResult.Enums;
 
-namespace soft_result.Interfaces;
+namespace SoftResult.Interfaces;
 
 /// <summary>
 /// Интерфейс результата

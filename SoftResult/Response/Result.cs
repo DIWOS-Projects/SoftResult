@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using soft_result.Enums;
-using soft_result.Interfaces;
+using SoftResult.Enums;
+using SoftResult.Interfaces;
 using System.Text.Json;
-using IResult = soft_result.Interfaces.IResult;
+using IResult = SoftResult.Interfaces.IResult;
 
-namespace soft_result.Response;
+namespace SoftResult.Response;
 
 /// <summary>
 /// Результат
