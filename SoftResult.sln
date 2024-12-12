@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "soft-result", "soft-result\soft-result.csproj", "{B92914B0-3142-4767-9A95-2CDFACBD0214}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftResult", "SoftResult\SoftResult.csproj", "{B92914B0-3142-4767-9A95-2CDFACBD0214}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
