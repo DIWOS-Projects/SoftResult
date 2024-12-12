@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCopyrightAttribute("DIWOS")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("1.4.8.1")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.4.8.1")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.4.8.1+a949f82fcc84e4f069d04d99fd5e4e5a086763d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.4.8.1+00f6b4f88c00182e232367479711c25506c2d48e")]
 [assembly: System.Reflection.AssemblyProductAttribute("SoftResult")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SoftResult")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.4.8.1")]
