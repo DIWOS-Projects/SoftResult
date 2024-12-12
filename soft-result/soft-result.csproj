@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>soft_result</RootNamespace>
+        <Version>1.4.8.1</Version>
+        <Authors>Artem Konkin, Ekaterina Volodina</Authors>
+        <Company>Salyk Service</Company>
+        <Description>1.4.8.1</Description>
+        <PackageTags>SoftResult;Lib;Nugget</PackageTags>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>true</IsPackable>
+        <EnableDefaultStaticWebAssets>false</EnableDefaultStaticWebAssets>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Soft Result</Title>
+        <Copyright>DIWOS</Copyright>
+        <PackageProjectUrl>https://github.com/DIWOS-Projects/soft-result</PackageProjectUrl>
+        <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/DIWOS-Projects/soft-result</RepositoryUrl>
+        <RepositoryType>Github</RepositoryType>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageReleaseNotes>1.4.8.1</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <DebugType>portable</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="..\.gitignore">
+        <Link>.gitignore</Link>
+      </Content>
+      <Content Include="..\README.md">
+        <Link>README.md</Link>
+          <PackagePath></PackagePath>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="LICENSE" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>
