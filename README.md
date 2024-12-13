@@ -154,7 +154,7 @@ The controller can directly return the result from the `Query` since `IResult` i
 - 📋 **Consistent API Responses:** Simplifies client-side processing.  
 - 🚀 **Easy Integration:** Works seamlessly with Mediator, controllers, and services.  
 - 🔄 **Flexible:** Easily adapts to project-specific requirements.  
-- 📜 **Standards Compliant:** Supports RFC 7807 for error descriptions.  
+- 📜 **Standards Compliant:** Supports RFC 9457 for error descriptions.  
 
 ---
 
