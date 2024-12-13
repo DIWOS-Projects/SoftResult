@@ -1,42 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using SoftResult.Enums;
 
 namespace SoftResult.Interfaces;
 
 /// <summary>
-/// Интерфейс результата
+/// Result interface
 /// </summary>
 public interface IResult : IActionResult
 {
     /// <summary>
-    /// Язык
+    /// Language
     /// </summary>
     public Locale Locale { get; set; }
 
     /// <summary>
-    /// Сообщение
+    /// Messages
     /// </summary>
     public IEnumerable<string> Messages { get; init; }
 
     /// <summary>
-    /// Ошибки
+    /// Errors
     /// </summary>
     public IEnumerable<IError>? Errors { get; init; }
 
     /// <summary>
-    /// Статус
+    /// Status
     /// </summary>
     public bool IsSuccess => Errors == null || !Errors.Any();
 }
 
 /// <summary>
-/// Интерфейс результата с возвращаемым значением конкретного типа
+/// Result interface with a specific return value type
 /// </summary>
-/// <typeparam name="T">  Тип возвращаемого значения </typeparam>
+/// <typeparam name="T">The type of the return value</typeparam>
 public interface IResult<T> : IResult where T : class
 {
     /// <summary>
-    /// Возвращаемое значение
+    /// Return value
     /// </summary>
     public T? Value { get; set; }
 }
