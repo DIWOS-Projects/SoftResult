@@ -1,5 +1,7 @@
 [Nugget](https://www.nuget.org/packages/SoftResult)
 
+# ⭐ Star This Repository!
+
 ---
 
 # 🎯 **SoftResult**
