@@ -1,14 +1,10 @@
 # 🎯 **SoftResult**
 
----
-
 [Nugget](https://www.nuget.org/packages/SoftResult)
 
 ---
 
 # ⭐ Star This Repository!
-
----
 
 ![logo.png](logo.png)
 
