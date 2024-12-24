@@ -166,3 +166,7 @@ The controller can directly return the result from the `Query` since `IResult` i
 ---
 
 Try **SoftResult** today to make your API standardized, simple, and efficient! 🎉
+
+## SAST Tools
+
+[PVS-Studio](https://pvs-studio.com/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
