@@ -2,7 +2,6 @@
 using SoftResult.Enums;
 using SoftResult.Interfaces;
 using System.Text.Json;
-using IResult = SoftResult.Interfaces.IResult;
 
 namespace SoftResult.Response;
 
@@ -74,7 +73,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="message"> Сообщение об ошибке. </param>
     /// <returns> Результат с кодом 400 Bad Request. </returns>
-    public static IResult BadRequest(string message) => new Result<T>
+    public static IResult<T> BadRequest(string message) => new Result<T>
     {
         IsSuccess = false,
         StatusCode = StatusCodes.Status400BadRequest,
@@ -82,11 +81,11 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Возвращает результат ошибки (HTTP 400 Bad Request) с переданной ошибкой.
+    /// Возвращает результат "Bad Request" с объектом ошибки.
     /// </summary>
     /// <param name="error"> Объект ошибки. </param>
     /// <returns> Результат с кодом 400 Bad Request. </returns>
-    public static IResult BadRequest(IError error) => new Result<T>
+    public static IResult<T> BadRequest(IError error) => new Result<T>
     {
         IsSuccess = false,
         StatusCode = StatusCodes.Status400BadRequest,
@@ -99,7 +98,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="errorsList"> Список ошибок. </param>
     /// <returns> Результат с кодом 400 Bad Request. </returns>
-    public static IResult BadRequest(IEnumerable<IError> errorsList)
+    public static IResult<T> BadRequest(IEnumerable<IError> errorsList)
     {
         var errors = errorsList.ToList();
         return new Result<T>
@@ -118,7 +117,7 @@ public sealed class Result<T> : IResult<T>
     /// <param name="key"> Ключ для метаданных ошибки. </param>
     /// <param name="value"> Значение, связанное с ключом. </param>
     /// <returns> Результат с кодом 400 Bad Request. </returns>
-    public static IResult BadRequest(string errorMessage, string key, object value) => new Result<T>
+    public static IResult<T> BadRequest(string errorMessage, string key, object value) => new Result<T>
     {
         IsSuccess = false,
         StatusCode = StatusCodes.Status400BadRequest,
@@ -141,7 +140,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="message"> Сообщение с описанием причины. </param>
     /// <returns> Результат с кодом 404 Not Found. </returns>
-    public static IResult NotFound(string message) => new Result<T>
+    public static IResult<T> NotFound(string message) => new Result<T>
     {
         IsSuccess = false,
         StatusCode = StatusCodes.Status200OK,
@@ -153,7 +152,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="error"> Объект ошибки. </param>
     /// <returns> Результат с кодом 404 Not Found. </returns>
-    public static IResult NotFound(IError error) => new Result<T>
+    public static IResult<T> NotFound(IError error) => new Result<T>
     {
         IsSuccess = false,
         StatusCode = StatusCodes.Status200OK,
@@ -166,7 +165,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="errorsList"> Список ошибок. </param>
     /// <returns> Результат с кодом 404 Not Found. </returns>
-    public static IResult NotFound(IEnumerable<IError> errorsList)
+    public static IResult<T> NotFound(IEnumerable<IError> errorsList)
     {
         var errors = errorsList.ToList();
         return new Result<T>
@@ -185,7 +184,7 @@ public sealed class Result<T> : IResult<T>
     /// <param name="key">Ключ для метаданных. </param>
     /// <param name="value">Значение, связанное с ключом. </param>
     /// <returns> Результат с кодом 400 Bad Request. </returns>
-    public static IResult NotFound(string errorMessage, string key, object value) => new Result<T>
+    public static IResult<T> NotFound(string errorMessage, string key, object value) => new Result<T>
     {
         IsSuccess = false,
         StatusCode = StatusCodes.Status200OK,
@@ -207,11 +206,11 @@ public sealed class Result<T> : IResult<T>
     /// Возвращает результат без содержимого (HTTP 204 No Content).
     /// </summary>
     /// <returns>Результат с кодом 204 No Content.</returns>
-    public static IResult NoContent() => new Result<T>
+    public static IResult<T> NoContent(string message) => new Result<T>
     {
         IsSuccess = true,
         StatusCode = StatusCodes.Status204NoContent,
-        Messages = Array.Empty<string>(),
+        Messages = [message],
         Value = default
     };
 
