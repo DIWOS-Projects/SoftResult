@@ -33,7 +33,7 @@ public interface IResult : IActionResult
 /// Result interface with a specific return value type
 /// </summary>
 /// <typeparam name="T">The type of the return value</typeparam>
-public interface IResult<T> : IResult where T : class
+public interface IResult<T> : IResult
 {
     /// <summary>
     /// Return value
