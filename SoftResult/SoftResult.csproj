@@ -3,10 +3,10 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <RootNamespace>SoftResult</RootNamespace>
-        <Version>1.4.8.1</Version>
+        <Version>1.4.8.2</Version>
         <Authors>Artem Konkin, Ekaterina Volodina</Authors>
         <Company>Salyk Service</Company>
-        <Description>1.4.8.1</Description>
+        <Description>1.4.8.2</Description>
         <PackageTags>SoftResult;Lib;Nugget</PackageTags>
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -24,7 +24,7 @@
         <RepositoryType>Github</RepositoryType>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <PackageReleaseNotes>1.4.8.1</PackageReleaseNotes>
+        <PackageReleaseNotes>1.4.8.2</PackageReleaseNotes>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">

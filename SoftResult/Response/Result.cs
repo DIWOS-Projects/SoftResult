@@ -10,7 +10,7 @@ namespace SoftResult.Response;
 /// Результат
 /// </summary>
 /// <typeparam name="T">  Тип возвращаемого значения </typeparam>
-public sealed class Result<T> : IResult<T> where T : class
+public sealed class Result<T> : IResult<T>
 {
     /// <summary>
     ///Тип возвращаемого значения
@@ -201,6 +201,18 @@ public sealed class Result<T> : IResult<T> where T : class
                 }
             }
         ]
+    };
+    
+    /// <summary>
+    /// Возвращает результат без содержимого (HTTP 204 No Content).
+    /// </summary>
+    /// <returns>Результат с кодом 204 No Content.</returns>
+    public static IResult NoContent() => new Result<T>
+    {
+        IsSuccess = true,
+        StatusCode = StatusCodes.Status204NoContent,
+        Messages = Array.Empty<string>(),
+        Value = default
     };
 
     /// <summary>
