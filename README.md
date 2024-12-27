@@ -136,8 +136,97 @@ public async Task<IActionResult> GetSystemTypes([FromQuery] GetSystemTypesQuery 
 }
 ```
 
+### ⚙️ FluentValidator Error Handling In Middleware To `IError`
+
+ValidationFilter.cs
+```csharp
+public class ValidationFilter : IActionFilter
+{
+    public void OnActionExecuted(ActionExecutedContext context) { }
+
+    public void OnActionExecuting(ActionExecutingContext context)
+    {
+        if (context.ModelState.IsValid)
+            return;
+
+        var errors = context.ModelState
+            .Where(m => m.Value != null && m.Value.Errors.Any())
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value?.Errors.Select(e => e.ErrorMessage)
+            .ToList());
+
+        var result = errors.Select(e =>
+        {
+            if (e.Value != null)
+                return new Dictionary<string, List<string>>
+                {
+                    { e.Key, e.Value }
+                };
+
+            return null;
+        });
+
+        context.Result = Result<object>.BadRequest("❌ Validation failed", "📝 ValidationErrors", result);
+    }
+}
+```
+
+ValidatorConfiguration.cs
+```csharp
+public static class ValidatorConfiguration
+{
+    public static IServiceCollection AddFluentValidatorConfiguration(this IServiceCollection services)
+    {
+        services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
+        });
+
+        services.AddScoped<ValidationFilter>();
+        
+        services.AddFluentValidationAutoValidation(options =>
+        {
+            options.DisableDataAnnotationsValidation = true;
+
+        });
+
+        services.AddFluentValidationClientsideAdapters();
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+        return services;
+    }
+}
+```
+
+Program.cs
+```csharp
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ValidationFilter>();
+});
+
+builder.Services.AddFluentValidatorConfiguration();
+```
+
+### **⚙️ `List<IError>` Return Example**
+
+```csharp
+var token = await keycloakService.AuthenticateAsync(command.Username, command.Password);
+if (token is null)
+{
+    var error = new Error("Invalid username or password", new Dictionary<string, string>
+    {
+        { "username", command.Username },
+        { "password", command.Password }
+    });
+    
+    return Result<KeycloakTokenResponseDto>.NotFound(error);
+}
+```
+
+---
+
 **💡 Note:**  
-The controller can directly return the result from the `Query` since `IResult` inherits from `IActionResult`.  
+The controller can directly return the result from the `Query` since `IResult` inherits from `IActionResult`.
 
 ---
 
