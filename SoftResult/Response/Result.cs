@@ -143,7 +143,7 @@ public sealed class Result<T> : IResult<T>
     public static IResult<T> NotFound(string message) => new Result<T>
     {
         IsSuccess = false,
-        StatusCode = StatusCodes.Status200OK,
+        StatusCode = StatusCodes.Status404NotFound,
         Messages = [message]
     };
 
@@ -155,7 +155,7 @@ public sealed class Result<T> : IResult<T>
     public static IResult<T> NotFound(IError error) => new Result<T>
     {
         IsSuccess = false,
-        StatusCode = StatusCodes.Status200OK,
+        StatusCode = StatusCodes.Status404NotFound,
         Messages = [error.Message],
         Errors = [error]
     };
@@ -171,7 +171,7 @@ public sealed class Result<T> : IResult<T>
         return new Result<T>
         {
             IsSuccess = false,
-            StatusCode = StatusCodes.Status200OK,
+            StatusCode = StatusCodes.Status404NotFound,
             Messages = [errors.First().Message],
             Errors = errors
         };
@@ -187,7 +187,7 @@ public sealed class Result<T> : IResult<T>
     public static IResult<T> NotFound(string errorMessage, string key, object value) => new Result<T>
     {
         IsSuccess = false,
-        StatusCode = StatusCodes.Status200OK,
+        StatusCode = StatusCodes.Status404NotFound,
         Messages = [errorMessage],
         Errors =
         [
