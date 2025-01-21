@@ -5,5 +5,5 @@
 *.suo
 *.vsidx
 .vscode/
-soft-result/obj/
-soft-result/bin/
+SoftResult/obj/
+SoftResult/bin/
