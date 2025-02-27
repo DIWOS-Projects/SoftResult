@@ -18,10 +18,10 @@ public enum Locale
     /// <summary>
     /// Кыргызский язык
     /// </summary>
-    Kyr = 1,
+    Kyr = 2,
 
     /// <summary>
     /// Английский язык
     /// </summary>
-    Eng = 1
+    Eng = 3
 }
