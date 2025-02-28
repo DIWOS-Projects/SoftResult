@@ -54,7 +54,7 @@ public sealed class Result<T> : IResult<T>
         IsSuccess = true,
         StatusCode = StatusCodes.Status200OK,
         Value = value,
-        Messages = ["Ok"]
+        Messages = new List<string> { "Ok" }.AsReadOnly()
     };
 
     /// <summary>
@@ -325,19 +325,33 @@ public sealed class Result<T> : IResult<T>
     /// <returns>Asynchronous task.</returns>
     public async Task ExecuteResultAsync(ActionContext context)
     {
-        context.HttpContext.Response.StatusCode = StatusCode;
-        context.HttpContext.Response.ContentType = "application/json";
-
-        var options = new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve };
-        var json = JsonSerializer.Serialize(new
+        try
         {
-            IsSuccess,
-            Locale,
-            Messages,
-            Value,
-            Errors
-        }, options);
+            context.HttpContext.Response.StatusCode = StatusCode;
+            context.HttpContext.Response.ContentType = "application/json";
 
-        await context.HttpContext.Response.WriteAsync(json);
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                WriteIndented = true
+            };
+
+            var json = JsonSerializer.Serialize(new
+            {
+                IsSuccess,
+                Locale,
+                Messages,
+                Value,
+                Errors
+            }, options);
+
+            await context.HttpContext.Response.WriteAsync(json);
+        }
+        catch (JsonException ex)
+        {
+            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.HttpContext.Response.WriteAsync(JsonSerializer.Serialize(
+                new { error = "Serialization error: " + ex.Message }));
+        }
     }
 }

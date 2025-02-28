@@ -70,11 +70,6 @@ public sealed class Error : IError
     public Error(string key, object value)
     {
         Message = $"{key}: {value}";
-        Metadata = new Dictionary<string, object>
-        {
-            {
-                key, value
-            }
-        };
+        Metadata = new Dictionary<string, object> { { key, value } }.AsReadOnly();
     }
 }
