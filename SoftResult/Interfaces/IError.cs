@@ -1,18 +1,18 @@
 ﻿namespace SoftResult.Interfaces;
 
 /// <summary>
-/// Интерфейс ошибки
+/// Error interface
 /// </summary>
 public interface IError
 {
     /// <summary>
-    /// Сообщение об ошибке
+    /// Error message
     /// </summary>
     string Message { get; }
 
     /// <summary>
-    /// Справочник деталей ошибки
-    /// элемент с ошибкой, причина ошибки
+    /// Dictionary of error details
+    /// element with the error, reason for the error
     /// </summary>
-    IReadOnlyDictionary<string, object> Metadata { get; set; }
+    IReadOnlyDictionary<string, object> Metadata { get; init; }
 }
