@@ -6,7 +6,7 @@
         <Version>1.5.9.1</Version>
         <Authors>Artem Konkin, Ekaterina Volodina, Anastasiya Lugovaya, Adilet Akunov</Authors>
         <Company>Salyk Service</Company>
-        <Description>1.4.8.3</Description>
+        <Description>1.5.9.1</Description>
         <PackageTags>SoftResult;Lib;Nugget</PackageTags>
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -24,7 +24,7 @@
         <RepositoryType>Github</RepositoryType>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <PackageReleaseNotes>1.4.8.3</PackageReleaseNotes>
+        <PackageReleaseNotes>1.5.9.1</PackageReleaseNotes>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
