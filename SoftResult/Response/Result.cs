@@ -350,8 +350,7 @@ public sealed class Result<T> : IResult<T>
         catch (JsonException ex)
         {
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            await context.HttpContext.Response.WriteAsync(JsonSerializer.Serialize(
-                new { error = "Serialization error: " + ex.Message }));
+            await context.HttpContext.Response.WriteAsync(JsonSerializer.Serialize(new { error = "Serialization error: " + ex.Message }));
         }
     }
 }
