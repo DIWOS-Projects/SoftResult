@@ -17,10 +17,9 @@ internal static class ResultExtensions
             throw new ArgumentNullException(nameof(value), "The message collection cannot be null");
 
         var enumerable = value.ToList();
-        if (enumerable.Count == 0)
-            throw new ArgumentException("The list of errors cannot be empty when attempting to retrieve an error string", nameof(value));
-
-        return string.Join(Environment.NewLine, enumerable);
+        return enumerable.Count == 0
+            ? throw new ArgumentException("The list of errors cannot be empty when attempting to retrieve an error string", nameof(value))
+            : string.Join(Environment.NewLine, enumerable);
     }
 
     /// <summary>
@@ -34,9 +33,8 @@ internal static class ResultExtensions
         if (value == null)
             throw new ArgumentNullException(nameof(value), "The message collection cannot be null when combining all messages into a single string");
 
-        if (value.Count == 0)
-            throw new ArgumentException("Metadata cannot be empty when attempting to retrieve a metadata string", nameof(value));
-
-        return string.Join(Environment.NewLine, value.Select(x => x.Key + ": " + x.Value));
+        return value.Count == 0
+            ? throw new ArgumentException("Metadata cannot be empty when attempting to retrieve a metadata string", nameof(value))
+            : string.Join(Environment.NewLine, value.Select(x => x.Key + ": " + x.Value));
     }
 }

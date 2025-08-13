@@ -12,6 +12,12 @@ namespace SoftResult.Response;
 /// <typeparam name="T">Type of the return value</typeparam>
 public sealed class Result<T> : IResult<T>
 {
+    private readonly JsonSerializerOptions _jsonSerializerOptions = new()
+    {
+        ReferenceHandler = ReferenceHandler.Preserve,
+        WriteIndented = true
+    };
+
     /// <summary>
     /// Type of the return value
     /// </summary>
@@ -330,12 +336,6 @@ public sealed class Result<T> : IResult<T>
             context.HttpContext.Response.StatusCode = StatusCode;
             context.HttpContext.Response.ContentType = "application/json";
 
-            var options = new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                WriteIndented = true
-            };
-
             var json = JsonSerializer.Serialize(new
             {
                 IsSuccess,
@@ -343,7 +343,7 @@ public sealed class Result<T> : IResult<T>
                 Messages,
                 Value,
                 Errors
-            }, options);
+            }, _jsonSerializerOptions);
 
             await context.HttpContext.Response.WriteAsync(json);
         }
