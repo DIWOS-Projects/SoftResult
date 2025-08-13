@@ -1,25 +1,28 @@
-﻿namespace SoftResult.Extensions;
+﻿using SoftResult.Interfaces;
+
+namespace SoftResult.Extensions;
 
 /// <summary>
-/// Extension class for processing result messages and metadata
+/// Extension class for processing result messages
 /// </summary>
 internal static class ResultExtensions
 {
     /// <summary>
-    /// Converts a collection of messages into a single string
+    /// Converts messages from a Result object into a single string
     /// </summary>
-    /// <param name="value"> Collection of string messages. </param>
-    /// <returns> A string containing all messages separated by a new line. </returns>
-    /// <exception cref="ArgumentException"> Thrown if the message collection is empty </exception>
-    public static string MessagesToString(this IEnumerable<string> value)
+    /// <param name="result"> The Result object containing a collection of messages </param>
+    /// <returns> A string containing all messages separated by a new line </returns>
+    public static string MessagesToString<T>(this IResult<T> result)
     {
-        if (value == null)
-            throw new ArgumentNullException(nameof(value), "The message collection cannot be null");
+        if (result == null)
+            throw new ArgumentNullException(nameof(result), "The result object cannot be null");
 
-        var enumerable = value.ToList();
-        return enumerable.Count == 0
-            ? throw new ArgumentException("The list of errors cannot be empty when attempting to retrieve an error string", nameof(value))
-            : string.Join(Environment.NewLine, enumerable);
+        if (result.Messages.Count == 0)
+            return string.Empty;
+
+        return result.Messages.Count == 0
+            ? string.Empty
+            : string.Join(Environment.NewLine, result.Messages);
     }
 
     /// <summary>

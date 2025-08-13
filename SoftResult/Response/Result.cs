@@ -4,6 +4,8 @@ using SoftResult.Interfaces;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace SoftResult.Response;
 
 /// <summary>
