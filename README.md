@@ -11,7 +11,7 @@
 ## 📋 **Library Information**
 
 - **Type:**          API Library  
-- **Framework:**     .NET 8  
+- **Framework:**     .NET 8, 9
 - **Dependencies:**  _None (lightweight library)_  
 
 ---
@@ -27,7 +27,7 @@ SoftResult is a universal library for generating standardized API responses in A
 
 ## 🚀 **Setup Instructions**
 
-1. 🛠️ Ensure that you have the **.NET 8** development environment installed.  
+1. 🛠️ Ensure that you have the **.NET 8, 9** development environment installed.  
 2. Run the following commands to build and publish the package:  
 
 ### **🔧 Build the Package**
@@ -42,12 +42,12 @@ mkdir /LocalNugget
 
 ### **📤 Publish the Package to a Local Source**
 ```shell
-dotnet nuget push .\soft-result\bin\Release\soft-result.1.4.8.1.nupkg --source C:\LocalNugget\
+dotnet nuget push .\soft-result\bin\Release\soft-result.1.5.9.1.nupkg --source C:\LocalNugget\
 ```
 
 ### **🌐 Publish the Package to a Remote Source**
 ```shell
-dotnet nuget push .\soft-result\bin\Release\soft-result.1.4.8.1.nupkg --api-key YOUR_API_KEY --source https://packages.salyk.kg/nuget
+dotnet nuget push .\soft-result\bin\Release\soft-result.1.5.9.1.nupkg --api-key YOUR_API_KEY --source https://packages.salyk.kg/nuget
 ```
 
 ### **➕ Add a Local Source to NuGet**
@@ -232,10 +232,10 @@ The controller can directly return the result from the `Query` since `IResult` i
 
 ## 📦 **Package Versioning**
 
-- **soft-result: 1.4.8.1**  
+- **soft-result: 1.5.9.1**  
   - **1:** Major version.  
-  - **4:** Last digit of the year — 2024.  
-  - **8:** .NET version.  
+  - **5:** Last digit of the year — 2024.  
+  - **9:** .NET version.  
   - **1:** Incremental version (increased with each release).  
 
 ---
