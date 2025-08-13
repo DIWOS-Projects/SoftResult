@@ -54,10 +54,10 @@ public sealed class Result<T> : IResult<T>
     // Синхронные методы
 
     /// <summary>
-    /// Creates a successful result (HTTP 200 OK) with the specified type of return value.
+    /// Creates a successful result (HTTP 200 OK) with the specified type of return value
     /// </summary>
-    /// <param name="value">Value to be returned in the result.</param>
-    /// <returns>Result object with a 200 OK code.</returns>
+    /// <param name="value">Value to be returned in the result</param>
+    /// <returns>Result object with a 200 OK code</returns>
     public static IResult<T> Ok(T value) => new Result<T>
     {
         IsSuccess = true,
@@ -67,10 +67,10 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Creates a successful result (HTTP 200 OK) for an asynchronous stream.
+    /// Creates a successful result (HTTP 200 OK) for an asynchronous stream
     /// </summary>
-    /// <param name="value">The asynchronous stream to be returned.</param>
-    /// <returns>A result object with a 200 OK status code.</returns>
+    /// <param name="value">The asynchronous stream to be returned</param>
+    /// <returns>A result object with a 200 OK status code</returns>
     public static IResult<T> Ok(IAsyncEnumerable<T> value) => new Result<T>
     {
         IsSuccess = true,
@@ -80,11 +80,11 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Creates a successful result (HTTP 200 OK) with a custom message and specified value type.
+    /// Creates a successful result (HTTP 200 OK) with a custom message and specified value type
     /// </summary>
-    /// <param name="message">Message indicating successful execution.</param>
-    /// <param name="value">Value to be returned.</param>
-    /// <returns>Result object with a 200 OK code.</returns>
+    /// <param name="message">Message indicating successful execution</param>
+    /// <param name="value">Value to be returned</param>
+    /// <returns>Result object with a 200 OK code</returns>
     public static IResult<T> Ok(string message, T value) => new Result<T>
     {
         IsSuccess = true,
@@ -94,10 +94,10 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Returns an error result (HTTP 400 Bad Request) with the specified message.
+    /// Returns an error result (HTTP 400 Bad Request) with the specified message
     /// </summary>
-    /// <param name="message">Error message.</param>
-    /// <returns>Result with a 400 Bad Request code.</returns>
+    /// <param name="message">Error message</param>
+    /// <returns>Result with a 400 Bad Request code</returns>
     public static IResult<T> BadRequest(string message) => new Result<T>
     {
         IsSuccess = false,
@@ -107,10 +107,10 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Returns a "Bad Request" result with an error object.
+    /// Returns a "Bad Request" result with an error object
     /// </summary>
-    /// <param name="error">Error object.</param>
-    /// <returns>Result with a 400 Bad Request code.</returns>
+    /// <param name="error">Error object</param>
+    /// <returns>Result with a 400 Bad Request code</returns>
     public static IResult<T> BadRequest(IError error) => new Result<T>
     {
         IsSuccess = false,
@@ -120,10 +120,10 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Returns an error result (HTTP 400 Bad Request) with a collection of errors.
+    /// Returns an error result (HTTP 400 Bad Request) with a collection of errors
     /// </summary>
-    /// <param name="errorsList">List of errors.</param>
-    /// <returns>Result with a 400 Bad Request code.</returns>
+    /// <param name="errorsList">List of errors</param>
+    /// <returns>Result with a 400 Bad Request code</returns>
     public static IResult<T> BadRequest(IEnumerable<IError> errorsList)
     {
         if (errorsList == null)
@@ -145,12 +145,12 @@ public sealed class Result<T> : IResult<T>
     }
 
     /// <summary>
-    /// Returns an error result (HTTP 400 Bad Request) with a message, key, and additional data value.
+    /// Returns an error result (HTTP 400 Bad Request) with a message, key, and additional data value
     /// </summary>
-    /// <param name="errorMessage">Error message.</param>
-    /// <param name="key">Key for error metadata.</param>
-    /// <param name="value">Value associated with the key.</param>
-    /// <returns>Result with a 400 Bad Request code.</returns>
+    /// <param name="errorMessage">Error message</param>
+    /// <param name="key">Key for error metadata</param>
+    /// <param name="value">Value associated with the key</param>
+    /// <returns>Result with a 400 Bad Request code</returns>
     public static IResult<T> BadRequest(string errorMessage, string key, object value) => new Result<T>
     {
         IsSuccess = false,
@@ -163,10 +163,10 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Returns a "not found" result (HTTP 404 Not Found) with the specified message.
+    /// Returns a "not found" result (HTTP 404 Not Found) with the specified message
     /// </summary>
-    /// <param name="message">Message describing the reason.</param>
-    /// <returns>Result with a 404 Not Found code.</returns>
+    /// <param name="message">Message describing the reason</param>
+    /// <returns>Result with a 404 Not Found code</returns>
     public static IResult<T> NotFound(string message) => new Result<T>
     {
         IsSuccess = false,
@@ -176,10 +176,10 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Returns a "not found" result (HTTP 404 Not Found) with the provided error.
+    /// Returns a "not found" result (HTTP 404 Not Found) with the provided error
     /// </summary>
-    /// <param name="error">Error object.</param>
-    /// <returns>Result with a 404 Not Found code.</returns>
+    /// <param name="error">Error object</param>
+    /// <returns>Result with a 404 Not Found code</returns>
     public static IResult<T> NotFound(IError error) => new Result<T>
     {
         IsSuccess = false,
@@ -189,10 +189,10 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Returns a "not found" result (HTTP 404 Not Found) with a collection of errors.
+    /// Returns a "not found" result (HTTP 404 Not Found) with a collection of errors
     /// </summary>
-    /// <param name="errorsList">List of errors.</param>
-    /// <returns>Result with a 404 Not Found code.</returns>
+    /// <param name="errorsList">List of errors</param>
+    /// <returns>Result with a 404 Not Found code</returns>
     public static IResult<T> NotFound(IEnumerable<IError> errorsList)
     {
         if (errorsList == null)
@@ -214,12 +214,12 @@ public sealed class Result<T> : IResult<T>
     }
 
     /// <summary>
-    /// Returns an error result (HTTP 404 Not Found) with an error message, key, and additional data.
+    /// Returns an error result (HTTP 404 Not Found) with an error message, key, and additional data
     /// </summary>
-    /// <param name="errorMessage">Error message.</param>
-    /// <param name="key">Key for metadata.</param>
-    /// <param name="value">Value associated with the key.</param>
-    /// <returns>Result with a 404 Not Found code.</returns>
+    /// <param name="errorMessage">Error message</param>
+    /// <param name="key">Key for metadata</param>
+    /// <param name="value">Value associated with the key</param>
+    /// <returns>Result with a 404 Not Found code</returns>
     public static IResult<T> NotFound(string errorMessage, string key, object value) => new Result<T>
     {
         IsSuccess = false,
@@ -232,10 +232,10 @@ public sealed class Result<T> : IResult<T>
     };
 
     /// <summary>
-    /// Returns a result with no content (HTTP 204 No Content).
+    /// Returns a result with no content (HTTP 204 No Content)
     /// </summary>
-    /// <param name="message">Message describing the result.</param>
-    /// <returns>Result with a 204 No Content code.</returns>
+    /// <param name="message">Message describing the result</param>
+    /// <returns>Result with a 204 No Content code</returns>
     public static IResult<T> NoContent(string message) => new Result<T>
     {
         IsSuccess = true,
@@ -247,111 +247,164 @@ public sealed class Result<T> : IResult<T>
     // Асинхронные методы
 
     /// <summary>
-    /// Asynchronously creates a successful result (HTTP 200 OK) with the specified type of return value.
+    /// Asynchronously creates a successful result (HTTP 200 OK) with the specified type of return value
     /// </summary>
-    /// <param name="value">Value to be returned in the result.</param>
-    /// <returns>Task containing a result object with a 200 OK code.</returns>
+    /// <param name="value">Value to be returned in the result</param>
+    /// <returns>Task containing a result object with a 200 OK code</returns>
     public static Task<IResult<T>> OkAsync(T value)
         => Task.FromResult(Ok(value));
 
     /// <summary>
-    /// Asynchronously creates a successful result (HTTP 200 OK) for an asynchronous stream.
+    /// Asynchronously creates a successful result (HTTP 200 OK) for an asynchronous stream
     /// </summary>
-    /// <param name="value">The asynchronous stream to be returned.</param>
-    /// <returns>A task containing a result object with a 200 OK status code.</returns>
+    /// <param name="value">The asynchronous stream to be returned</param>
+    /// <returns>A task containing a result object with a 200 OK status code</returns>
     public static Task<IResult<T>> OkAsync(IAsyncEnumerable<T> value)
         => Task.FromResult(Ok(value));
 
     /// <summary>
-    /// Asynchronously creates a successful result (HTTP 200 OK) with a custom message and specified value type.
+    /// Asynchronously creates a successful result (HTTP 200 OK) with a custom message and specified value type
     /// </summary>
-    /// <param name="message">Message indicating successful execution.</param>
-    /// <param name="value">Value to be returned.</param>
-    /// <returns>Task containing a result object with a 200 OK code.</returns>
+    /// <param name="message">Message indicating successful execution</param>
+    /// <param name="value">Value to be returned</param>
+    /// <returns>Task containing a result object with a 200 OK code</returns>
     public static Task<IResult<T>> OkAsync(string message, T value)
         => Task.FromResult(Ok(message, value));
 
     /// <summary>
-    /// Asynchronously returns an error result (HTTP 400 Bad Request) with the specified message.
+    /// Asynchronously returns an error result (HTTP 400 Bad Request) with the specified message
     /// </summary>
-    /// <param name="message">Error message.</param>
-    /// <returns>Task containing a result with a 400 Bad Request code.</returns>
+    /// <param name="message">Error message</param>
+    /// <returns>Task containing a result with a 400 Bad Request code</returns>
     public static Task<IResult<T>> BadRequestAsync(string message)
         => Task.FromResult(BadRequest(message));
 
     /// <summary>
-    /// Asynchronously returns a "Bad Request" result with an error object.
+    /// Asynchronously returns a "Bad Request" result with an error object
     /// </summary>
-    /// <param name="error">Error object.</param>
-    /// <returns>Task containing a result with a 400 Bad Request code.</returns>
+    /// <param name="error">Error object</param>
+    /// <returns>Task containing a result with a 400 Bad Request code</returns>
     public static Task<IResult<T>> BadRequestAsync(IError error)
         => Task.FromResult(BadRequest(error));
 
     /// <summary>
-    /// Asynchronously returns an error result (HTTP 400 Bad Request) with a collection of errors.
+    /// Asynchronously returns an error result (HTTP 400 Bad Request) with a collection of errors
     /// </summary>
-    /// <param name="errorsList">List of errors.</param>
-    /// <returns>Task containing a result with a 400 Bad Request code.</returns>
+    /// <param name="errorsList">List of errors</param>
+    /// <returns>Task containing a result with a 400 Bad Request code</returns>
     public static Task<IResult<T>> BadRequestAsync(IEnumerable<IError> errorsList)
         => Task.FromResult(BadRequest(errorsList));
 
     /// <summary>
-    /// Asynchronously returns an error result (HTTP 400 Bad Request) with a message, key, and additional data value.
+    /// Asynchronously returns an error result (HTTP 400 Bad Request) with a message, key, and additional data value
     /// </summary>
-    /// <param name="errorMessage">Error message.</param>
-    /// <param name="key">Key for error metadata.</param>
-    /// <param name="value">Value associated with the key.</param>
-    /// <returns>Task containing a result with a 400 Bad Request code.</returns>
+    /// <param name="errorMessage">Error message</param>
+    /// <param name="key">Key for error metadata</param>
+    /// <param name="value">Value associated with the key</param>
+    /// <returns>Task containing a result with a 400 Bad Request code</returns>
     public static Task<IResult<T>> BadRequestAsync(string errorMessage, string key, object value)
         => Task.FromResult(BadRequest(errorMessage, key, value));
 
     /// <summary>
-    /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with the specified message.
+    /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with the specified message
     /// </summary>
-    /// <param name="message">Message describing the reason.</param>
-    /// <returns>Task containing a result with a 404 Not Found code.</returns>
+    /// <param name="message">Message describing the reason</param>
+    /// <returns>Task containing a result with a 404 Not Found code</returns>
     public static Task<IResult<T>> NotFoundAsync(string message)
         => Task.FromResult(NotFound(message));
 
     /// <summary>
-    /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with the provided error.
+    /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with the provided error
     /// </summary>
-    /// <param name="error">Error object.</param>
-    /// <returns>Task containing a result with a 404 Not Found code.</returns>
+    /// <param name="error">Error object</param>
+    /// <returns>Task containing a result with a 404 Not Found code</returns>
     public static Task<IResult<T>> NotFoundAsync(IError error)
         => Task.FromResult(NotFound(error));
 
     /// <summary>
-    /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with a collection of errors.
+    /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with a collection of errors
     /// </summary>
-    /// <param name="errorsList">List of errors.</param>
-    /// <returns>Task containing a result with a 404 Not Found code.</returns>
+    /// <param name="errorsList">List of errors</param>
+    /// <returns>Task containing a result with a 404 Not Found code</returns>
     public static Task<IResult<T>> NotFoundAsync(IEnumerable<IError> errorsList)
         => Task.FromResult(NotFound(errorsList));
 
     /// <summary>
-    /// Asynchronously returns an error result (HTTP 404 Not Found) with an error message, key, and additional data.
+    /// Asynchronously returns an error result (HTTP 404 Not Found) with an error message, key, and additional data
     /// </summary>
-    /// <param name="errorMessage">Error message.</param>
-    /// <param name="key">Key for metadata.</param>
-    /// <param name="value">Value associated with the key.</param>
-    /// <returns>Task containing a result with a 404 Not Found code.</returns>
+    /// <param name="errorMessage">Error message</param>
+    /// <param name="key">Key for metadata</param>
+    /// <param name="value">Value associated with the key</param>
+    /// <returns>Task containing a result with a 404 Not Found code</returns>
     public static Task<IResult<T>> NotFoundAsync(string errorMessage, string key, object value)
         => Task.FromResult(NotFound(errorMessage, key, value));
 
     /// <summary>
-    /// Asynchronously returns a result with no content (HTTP 204 No Content).
+    /// Asynchronously returns a result with no content (HTTP 204 No Content)
     /// </summary>
-    /// <param name="message">Message describing the result.</param>
-    /// <returns>Task containing a result with a 204 No Content code.</returns>
+    /// <param name="message">Message describing the result</param>
+    /// <returns>Task containing a result with a 204 No Content code</returns>
     public static Task<IResult<T>> NoContentAsync(string message)
         => Task.FromResult(NoContent(message));
 
+    #region Implicit Operators
+
     /// <summary>
-    /// Asynchronously executes the result and returns it in JSON format with the specified status code.
+    /// Implicitly converts a value to a successful result
     /// </summary>
-    /// <param name="context">Action context in which the result is executed.</param>
-    /// <returns>Asynchronous task.</returns>
+    /// <param name="value">The value to be wrapped in a result</param>
+    public static implicit operator Result<T>(T value)
+        => (Result<T>)Ok(value);
+
+    /// <summary>
+    /// Implicitly converts an <see cref="OkObjectResult"/> to a successful result
+    /// </summary>
+    /// <param name="okResult">The OK result to convert</param>
+    public static implicit operator Result<T>(OkObjectResult okResult)
+    {
+        if (okResult.Value is T value)
+            return (Result<T>)Ok(value);
+
+        throw new InvalidCastException($"Cannot convert OkObjectResult with value of type {okResult.Value?.GetType()} to Result<{typeof(T)}>");
+    }
+
+    /// <summary>
+    /// Implicitly converts a <see cref="BadRequestObjectResult"/> to a failure result
+    /// </summary>
+    /// <param name="badRequestResult">The bad request result to convert</param>
+    public static implicit operator Result<T>(BadRequestObjectResult badRequestResult)
+    {
+        var message = badRequestResult.Value as string ?? "An unexpected error occurred.";
+        if (badRequestResult.Value is not ValidationProblemDetails problemDetails)
+            return (Result<T>)BadRequest(message);
+
+        var errorMessages = problemDetails.Errors
+           .SelectMany(kvp => kvp.Value.Select(msg => $"{kvp.Key}: {msg}"))
+           .ToList();
+
+        message = string.Join(Environment.NewLine, errorMessages);
+
+        return (Result<T>)BadRequest(message);
+    }
+
+    /// <summary>
+    /// Implicitly converts a <see cref="NotFoundObjectResult"/> to a failure result
+    /// </summary>
+    /// <param name="notFoundResult">The not found result to convert</param>
+    public static implicit operator Result<T>(NotFoundObjectResult notFoundResult)
+    {
+        var message = notFoundResult.Value as string ?? "The requested resource was not found";
+
+        return (Result<T>)NotFound(message);
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Asynchronously executes the result and returns it in JSON format with the specified status code
+    /// </summary>
+    /// <param name="context">Action context in which the result is executed</param>
+    /// <returns>Asynchronous task</returns>
     public async Task ExecuteResultAsync(ActionContext context)
     {
         context.HttpContext.Response.StatusCode = StatusCode;

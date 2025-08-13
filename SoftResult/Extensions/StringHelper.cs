@@ -26,7 +26,7 @@ internal static class ResultExtensions
     }
 
     /// <summary>
-    /// Converts a dictionary of metadata into a string, combining keys and values with a new line separator.
+    /// Converts a dictionary of metadata into a string, combining keys and values with a new line separator
     /// </summary>
     /// <param name="value"> Metadata dictionary. </param>
     /// <returns> A string containing keys and values of metadata separated by a new line. </returns>
