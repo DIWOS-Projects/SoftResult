@@ -1,27 +1,27 @@
 ﻿namespace SoftResult.Enums;
 
 /// <summary>
-/// Перечисление локализации для указания языка сообщений результатов
+/// Enumeration of localization to specify the language of result messages
 /// </summary>
 public enum Locale
 {
     /// <summary>
-    /// Локализация не определена
+    /// Localization is not defined
     /// </summary>
     Undefined = 0,
 
     /// <summary>
-    /// Русский язык
+    /// Russian language
     /// </summary>
     Rus = 1,
 
     /// <summary>
-    /// Кыргызский язык
+    /// Kyrgyz language
     /// </summary>
-    Kyr = 1,
+    Kyr = 2,
 
     /// <summary>
-    /// Английский язык
+    /// English language
     /// </summary>
-    Eng = 1
+    Eng = 3
 }

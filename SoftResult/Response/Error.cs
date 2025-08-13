@@ -4,23 +4,23 @@ using SoftResult.Interfaces;
 namespace SoftResult.Response;
 
 /// <summary>
-/// Ошибка
+/// Error
 /// </summary>
 public sealed class Error : IError
 {
     /// <summary>
-    /// Сообщение об ошибке
+    /// Error message
     /// </summary>
     public string Message { get; init; }
 
     /// <summary>
-    /// Справочник деталей ошибки
-    /// элемент с ошибкой, причина ошибки
+    /// Dictionary of error details
+    /// element with the error, reason for the error
     /// </summary>
-    public IReadOnlyDictionary<string, object> Metadata { get; set; } = new Dictionary<string, object>();
+    public IReadOnlyDictionary<string, object> Metadata { get; init; } = new Dictionary<string, object>().AsReadOnly();
 
     /// <summary>
-    /// Базовый случай ошибки
+    /// Base error case
     /// </summary>
     public Error()
     {
@@ -28,50 +28,48 @@ public sealed class Error : IError
     }
 
     /// <summary>
-    /// Ошибка с заданным текстом
+    /// Error with specified text
     /// </summary>
-    /// <param name="message">  Сообщение об ошибке  </param>
+    /// <param name="message"> Error message </param>
     public Error(string message)
     {
         Message = message;
     }
 
     /// <summary>
-    /// Ошибка с заданным текстом и
+    /// Error with specified text and metadata
     /// </summary>
-    /// <param name="message">  Сообщение об ошибке  </param>
-    /// <param name="metadata">  Детали ошибки  </param>
+    /// <param name="message"> Error message </param>
+    /// <param name="metadata"> Error details </param>
     public Error(string message, IReadOnlyDictionary<string, object> metadata)
     {
-        Message = message;
-        Metadata = metadata;
+        Message = message ?? throw new ArgumentNullException(nameof(message));
+        Metadata = metadata ?? throw new ArgumentNullException(nameof(metadata));
     }
 
     /// <summary>
-    /// Ошибка со справочником деталей ошибки
+    /// Error with a dictionary of error details
     /// </summary>
-    /// <param name="metadata">  Детали ошибки  </param>
+    /// <param name="metadata"> Error details </param>
     public Error(IReadOnlyDictionary<string, object> metadata)
     {
+        if (metadata == null)
+            throw new ArgumentNullException(nameof(metadata), "Metadata cannot be null");
+
         Message = metadata.MessagesToString();
         Metadata = metadata;
     }
 
     /// <summary>
-    /// Ошибка с деталью ошибки по ключ, значение
-    /// ключ - элемент с ошибкой
-    /// значение - описание причины ошибки в эоементе
+    /// Error with an error detail by key-value pair
+    /// key - element with the error
+    /// value - description of the error reason in the element
     /// </summary>
-    /// <param name="key">  Элемент с ошибкой  </param>
-    /// <param name="value">  Описание причины ошибки  </param>
+    /// <param name="key"> Element with the error </param>
+    /// <param name="value"> Description of the error reason </param>
     public Error(string key, object value)
     {
         Message = $"{key}: {value}";
-        Metadata = new Dictionary<string, object>
-        {
-            {
-                key, value
-            }
-        };
+        Metadata = new Dictionary<string, object> { { key, value } }.AsReadOnly();
     }
 }

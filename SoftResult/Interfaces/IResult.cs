@@ -16,17 +16,23 @@ public interface IResult : IActionResult
     /// <summary>
     /// Messages
     /// </summary>
-    public IEnumerable<string> Messages { get; init; }
+    public IReadOnlyCollection<string> Messages { get; init; }
 
     /// <summary>
     /// Errors
     /// </summary>
-    public IEnumerable<IError>? Errors { get; init; }
+    public IReadOnlyCollection<IError>? Errors { get; init; }
 
     /// <summary>
     /// Status
     /// </summary>
-    public bool IsSuccess => Errors == null || !Errors.Any();
+    public bool IsSuccess
+    {
+        get
+        {
+            return Errors == null || Errors.Count == 0;
+        }
+    }
 }
 
 /// <summary>
