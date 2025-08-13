@@ -16,7 +16,8 @@ public sealed class Result<T> : IResult<T>
 {
     private readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
-        ReferenceHandler = ReferenceHandler.Preserve,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         WriteIndented = true
     };
 
@@ -38,7 +39,7 @@ public sealed class Result<T> : IResult<T>
     /// <summary>
     /// List of messages
     /// </summary>
-    public required IReadOnlyCollection<string> Messages { get; init; }
+    public IReadOnlyCollection<string> Messages { get; init; } = [];
 
     /// <summary>
     /// List of errors
@@ -63,6 +64,19 @@ public sealed class Result<T> : IResult<T>
         StatusCode = StatusCodes.Status200OK,
         Value = value,
         Messages = new List<string> { "Ok" }.AsReadOnly()
+    };
+
+    /// <summary>
+    /// Creates a successful result (HTTP 200 OK) for an asynchronous stream.
+    /// </summary>
+    /// <param name="value">The asynchronous stream to be returned.</param>
+    /// <returns>A result object with a 200 OK status code.</returns>
+    public static IResult<T> Ok(IAsyncEnumerable<T> value) => new Result<T>
+    {
+        IsSuccess = true,
+        StatusCode = StatusCodes.Status200OK,
+        Value = (T)value,
+        Messages = ["Stream successfully retrieved"]
     };
 
     /// <summary>
@@ -144,14 +158,7 @@ public sealed class Result<T> : IResult<T>
         Messages = [errorMessage],
         Errors =
         [
-            new Error
-            {
-                Message = errorMessage,
-                Metadata = new Dictionary<string, object>
-                {
-                    { key, value }
-                }
-            }
+            new Error(errorMessage, new Dictionary<string, object> { { key, value } })
         ]
     };
 
@@ -220,14 +227,7 @@ public sealed class Result<T> : IResult<T>
         Messages = [errorMessage],
         Errors =
         [
-            new Error
-            {
-                Message = errorMessage,
-                Metadata = new Dictionary<string, object>
-                {
-                    { key, value }
-                }
-            }
+            new Error(errorMessage, new Dictionary<string, object> { { key, value } })
         ]
     };
 
@@ -244,12 +244,23 @@ public sealed class Result<T> : IResult<T>
         Value = default
     };
 
+    // Асинхронные методы
+
     /// <summary>
     /// Asynchronously creates a successful result (HTTP 200 OK) with the specified type of return value.
     /// </summary>
     /// <param name="value">Value to be returned in the result.</param>
     /// <returns>Task containing a result object with a 200 OK code.</returns>
-    public static Task<IResult<T>> OkAsync(T value) => Task.FromResult(Ok(value));
+    public static Task<IResult<T>> OkAsync(T value)
+        => Task.FromResult(Ok(value));
+
+    /// <summary>
+    /// Asynchronously creates a successful result (HTTP 200 OK) for an asynchronous stream.
+    /// </summary>
+    /// <param name="value">The asynchronous stream to be returned.</param>
+    /// <returns>A task containing a result object with a 200 OK status code.</returns>
+    public static Task<IResult<T>> OkAsync(IAsyncEnumerable<T> value)
+        => Task.FromResult(Ok(value));
 
     /// <summary>
     /// Asynchronously creates a successful result (HTTP 200 OK) with a custom message and specified value type.
@@ -257,28 +268,32 @@ public sealed class Result<T> : IResult<T>
     /// <param name="message">Message indicating successful execution.</param>
     /// <param name="value">Value to be returned.</param>
     /// <returns>Task containing a result object with a 200 OK code.</returns>
-    public static Task<IResult<T>> OkAsync(string message, T value) => Task.FromResult(Ok(message, value));
+    public static Task<IResult<T>> OkAsync(string message, T value)
+        => Task.FromResult(Ok(message, value));
 
     /// <summary>
     /// Asynchronously returns an error result (HTTP 400 Bad Request) with the specified message.
     /// </summary>
     /// <param name="message">Error message.</param>
     /// <returns>Task containing a result with a 400 Bad Request code.</returns>
-    public static Task<IResult<T>> BadRequestAsync(string message) => Task.FromResult(BadRequest(message));
+    public static Task<IResult<T>> BadRequestAsync(string message)
+        => Task.FromResult(BadRequest(message));
 
     /// <summary>
     /// Asynchronously returns a "Bad Request" result with an error object.
     /// </summary>
     /// <param name="error">Error object.</param>
     /// <returns>Task containing a result with a 400 Bad Request code.</returns>
-    public static Task<IResult<T>> BadRequestAsync(IError error) => Task.FromResult(BadRequest(error));
+    public static Task<IResult<T>> BadRequestAsync(IError error)
+        => Task.FromResult(BadRequest(error));
 
     /// <summary>
     /// Asynchronously returns an error result (HTTP 400 Bad Request) with a collection of errors.
     /// </summary>
     /// <param name="errorsList">List of errors.</param>
     /// <returns>Task containing a result with a 400 Bad Request code.</returns>
-    public static Task<IResult<T>> BadRequestAsync(IEnumerable<IError> errorsList) => Task.FromResult(BadRequest(errorsList));
+    public static Task<IResult<T>> BadRequestAsync(IEnumerable<IError> errorsList)
+        => Task.FromResult(BadRequest(errorsList));
 
     /// <summary>
     /// Asynchronously returns an error result (HTTP 400 Bad Request) with a message, key, and additional data value.
@@ -287,28 +302,32 @@ public sealed class Result<T> : IResult<T>
     /// <param name="key">Key for error metadata.</param>
     /// <param name="value">Value associated with the key.</param>
     /// <returns>Task containing a result with a 400 Bad Request code.</returns>
-    public static Task<IResult<T>> BadRequestAsync(string errorMessage, string key, object value) => Task.FromResult(BadRequest(errorMessage, key, value));
+    public static Task<IResult<T>> BadRequestAsync(string errorMessage, string key, object value)
+        => Task.FromResult(BadRequest(errorMessage, key, value));
 
     /// <summary>
     /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with the specified message.
     /// </summary>
     /// <param name="message">Message describing the reason.</param>
     /// <returns>Task containing a result with a 404 Not Found code.</returns>
-    public static Task<IResult<T>> NotFoundAsync(string message) => Task.FromResult(NotFound(message));
+    public static Task<IResult<T>> NotFoundAsync(string message)
+        => Task.FromResult(NotFound(message));
 
     /// <summary>
     /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with the provided error.
     /// </summary>
     /// <param name="error">Error object.</param>
     /// <returns>Task containing a result with a 404 Not Found code.</returns>
-    public static Task<IResult<T>> NotFoundAsync(IError error) => Task.FromResult(NotFound(error));
+    public static Task<IResult<T>> NotFoundAsync(IError error)
+        => Task.FromResult(NotFound(error));
 
     /// <summary>
     /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with a collection of errors.
     /// </summary>
     /// <param name="errorsList">List of errors.</param>
     /// <returns>Task containing a result with a 404 Not Found code.</returns>
-    public static Task<IResult<T>> NotFoundAsync(IEnumerable<IError> errorsList) => Task.FromResult(NotFound(errorsList));
+    public static Task<IResult<T>> NotFoundAsync(IEnumerable<IError> errorsList)
+        => Task.FromResult(NotFound(errorsList));
 
     /// <summary>
     /// Asynchronously returns an error result (HTTP 404 Not Found) with an error message, key, and additional data.
@@ -317,14 +336,16 @@ public sealed class Result<T> : IResult<T>
     /// <param name="key">Key for metadata.</param>
     /// <param name="value">Value associated with the key.</param>
     /// <returns>Task containing a result with a 404 Not Found code.</returns>
-    public static Task<IResult<T>> NotFoundAsync(string errorMessage, string key, object value) => Task.FromResult(NotFound(errorMessage, key, value));
+    public static Task<IResult<T>> NotFoundAsync(string errorMessage, string key, object value)
+        => Task.FromResult(NotFound(errorMessage, key, value));
 
     /// <summary>
     /// Asynchronously returns a result with no content (HTTP 204 No Content).
     /// </summary>
     /// <param name="message">Message describing the result.</param>
     /// <returns>Task containing a result with a 204 No Content code.</returns>
-    public static Task<IResult<T>> NoContentAsync(string message) => Task.FromResult(NoContent(message));
+    public static Task<IResult<T>> NoContentAsync(string message)
+        => Task.FromResult(NoContent(message));
 
     /// <summary>
     /// Asynchronously executes the result and returns it in JSON format with the specified status code.
@@ -333,26 +354,18 @@ public sealed class Result<T> : IResult<T>
     /// <returns>Asynchronous task.</returns>
     public async Task ExecuteResultAsync(ActionContext context)
     {
-        try
-        {
-            context.HttpContext.Response.StatusCode = StatusCode;
-            context.HttpContext.Response.ContentType = "application/json";
+        context.HttpContext.Response.StatusCode = StatusCode;
+        context.HttpContext.Response.ContentType = "application/json";
 
-            var json = JsonSerializer.Serialize(new
-            {
-                IsSuccess,
-                Locale,
-                Messages,
-                Value,
-                Errors
-            }, _jsonSerializerOptions);
-
-            await context.HttpContext.Response.WriteAsync(json);
-        }
-        catch (JsonException ex)
+        var responseDto = new ApiResponseDto<T>
         {
-            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            await context.HttpContext.Response.WriteAsync(JsonSerializer.Serialize(new { error = "Serialization error: " + ex.Message }));
-        }
+            IsSuccess = IsSuccess,
+            Locale = Locale,
+            Messages = Messages,
+            Value = Value,
+            Errors = Errors
+        };
+
+        await context.HttpContext.Response.WriteAsJsonAsync(responseDto, _jsonSerializerOptions, context.HttpContext.RequestAborted);
     }
 }
