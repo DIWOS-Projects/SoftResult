@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <RootNamespace>SoftResult</RootNamespace>
-        <Version>1.5.9.1</Version>
+        <Version>1.5.9.1-alpha.1</Version>
         <Authors>Artem Konkin, Ekaterina Volodina, Anastasiya Lugovaya, Adilet Akunov</Authors>
         <Company>Salyk Service</Company>
         <Description>Библиотека для обработки результатов операций с удобным API</Description>
@@ -68,9 +68,5 @@
         <None Include="LICENSE" Pack="true" PackagePath="\" />
         <None Include="icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="dotnet nuget push &quot;bin\Debug\SoftResult.1.5.9.1.nupkg&quot; --source &quot;Local Feed&quot;" />
-    </Target>
 
 </Project>
