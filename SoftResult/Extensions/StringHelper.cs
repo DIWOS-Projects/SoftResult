@@ -5,7 +5,7 @@ namespace SoftResult.Extensions;
 /// <summary>
 /// Extension class for processing result messages
 /// </summary>
-internal static class ResultExtensions
+internal static class StringHelper
 {
     /// <summary>
     /// Converts messages from a Result object into a single string

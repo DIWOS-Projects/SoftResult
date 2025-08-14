@@ -6,8 +6,8 @@
         <Version>1.5.9.1</Version>
         <Authors>Artem Konkin, Ekaterina Volodina, Anastasiya Lugovaya, Adilet Akunov</Authors>
         <Company>Salyk Service</Company>
-        <Description>1.5.9.1</Description>
-        <PackageTags>SoftResult;Lib;Nugget</PackageTags>
+        <Description>Библиотека для обработки результатов операций с удобным API</Description>
+        <PackageTags>SoftResult;Lib;Library;Result;ErrorHandling;ResultPattern;C#;NET</PackageTags>
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -24,7 +24,38 @@
         <RepositoryType>Github</RepositoryType>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <PackageReleaseNotes>1.5.9.1</PackageReleaseNotes>
+        <PackageReleaseNotes>
+        
+            ✨ Новые возможности (Features)
+
+            * Неявные преобразования (Implicit Operators): Добавлена возможность неявного преобразования
+            типов, что значительно упрощает код.
+            * Теперь можно возвращать объект T напрямую, и он будет автоматически обернут в
+            Result.Ok(value).
+            * Добавлена поддержка преобразования из стандартных OkObjectResult, BadRequestObjectResult и
+            NotFoundObjectResult в IResult, что улучшает совместимость с нативным ASP.NET Core.
+            * Поддержка асинхронных потоков: Добавлены перегрузки Ok() и OkAsync() для работы с
+            IAsyncEnumerable, что позволяет эффективно обрабатывать большие наборы данных без полной
+            загрузки в память.
+
+            🚀 Улучшения (Improvements)
+
+            * Оптимизация сериализации: Процесс сериализации IResult в JSON был оптимизирован. Теперь
+            используется статически кешированный экземпляр JsonSerializerOptions и специализированный DTO
+            (ApiResponseDto), что снижает нагрузку на GC и повышает производительность.
+            * Улучшен API для `Error`: Конструкторы в классе Error были заменены на статические фабричные
+            методы (Create, FromMetadata и др.). Это делает создание ошибок более явным и читаемым.
+
+            🔧 Рефакторинг (Refactoring)
+
+            * Модернизация Result: Из класса убрано ключевое слово required, что упрощает инициализацию
+            объектов.
+            
+            Это обновление делает библиотеку SoftResult еще более мощным инструментом для построения
+            стандартизированных и эффективных API.
+            
+        </PackageReleaseNotes>
+        <RunPostBuildEvent>Always</RunPostBuildEvent>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -33,24 +64,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\.gitignore">
-        <Link>.gitignore</Link>
-      </Content>
-      <Content Include="..\README.md">
-        <Link>README.md</Link>
-          <PackagePath></PackagePath>
-      </Content>
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+        <None Include="LICENSE" Pack="true" PackagePath="\" />
+        <None Include="icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
-    <ItemGroup>
-        <None Include="LICENSE" Pack="true" PackagePath="" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="icon.png">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
-      </None>
-    </ItemGroup>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="dotnet nuget push &quot;bin\Debug\SoftResult.1.5.9.1.nupkg&quot; --source &quot;Local Feed&quot;" />
+    </Target>
 
 </Project>

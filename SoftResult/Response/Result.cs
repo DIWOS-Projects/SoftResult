@@ -347,59 +347,6 @@ public sealed class Result<T> : IResult<T>
     public static Task<IResult<T>> NoContentAsync(string message)
         => Task.FromResult(NoContent(message));
 
-    #region Implicit Operators
-
-    /// <summary>
-    /// Implicitly converts a value to a successful result
-    /// </summary>
-    /// <param name="value">The value to be wrapped in a result</param>
-    public static implicit operator Result<T>(T value)
-        => (Result<T>)Ok(value);
-
-    /// <summary>
-    /// Implicitly converts an <see cref="OkObjectResult"/> to a successful result
-    /// </summary>
-    /// <param name="okResult">The OK result to convert</param>
-    public static implicit operator Result<T>(OkObjectResult okResult)
-    {
-        if (okResult.Value is T value)
-            return (Result<T>)Ok(value);
-
-        throw new InvalidCastException($"Cannot convert OkObjectResult with value of type {okResult.Value?.GetType()} to Result<{typeof(T)}>");
-    }
-
-    /// <summary>
-    /// Implicitly converts a <see cref="BadRequestObjectResult"/> to a failure result
-    /// </summary>
-    /// <param name="badRequestResult">The bad request result to convert</param>
-    public static implicit operator Result<T>(BadRequestObjectResult badRequestResult)
-    {
-        var message = badRequestResult.Value as string ?? "An unexpected error occurred.";
-        if (badRequestResult.Value is not ValidationProblemDetails problemDetails)
-            return (Result<T>)BadRequest(message);
-
-        var errorMessages = problemDetails.Errors
-           .SelectMany(kvp => kvp.Value.Select(msg => $"{kvp.Key}: {msg}"))
-           .ToList();
-
-        message = string.Join(Environment.NewLine, errorMessages);
-
-        return (Result<T>)BadRequest(message);
-    }
-
-    /// <summary>
-    /// Implicitly converts a <see cref="NotFoundObjectResult"/> to a failure result
-    /// </summary>
-    /// <param name="notFoundResult">The not found result to convert</param>
-    public static implicit operator Result<T>(NotFoundObjectResult notFoundResult)
-    {
-        var message = notFoundResult.Value as string ?? "The requested resource was not found";
-
-        return (Result<T>)NotFound(message);
-    }
-
-    #endregion
-
     /// <summary>
     /// Asynchronously executes the result and returns it in JSON format with the specified status code
     /// </summary>
