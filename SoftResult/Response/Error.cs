@@ -20,17 +20,9 @@ public sealed class Error : IError
     public IReadOnlyDictionary<string, object> Metadata { get; init; } = new Dictionary<string, object>().AsReadOnly();
 
     /// <summary>
-    /// Base error case
-    /// </summary>
-    public Error()
-    {
-        Message = "Error";
-    }
-
-    /// <summary>
     /// Error with specified text
     /// </summary>
-    /// <param name="message"> Error message </param>
+    /// <param name="message">Error message</param>
     public Error(string message)
     {
         Message = message;
@@ -39,8 +31,8 @@ public sealed class Error : IError
     /// <summary>
     /// Error with specified text and metadata
     /// </summary>
-    /// <param name="message"> Error message </param>
-    /// <param name="metadata"> Error details </param>
+    /// <param name="message">Error message</param>
+    /// <param name="metadata">Error details</param>
     public Error(string message, IReadOnlyDictionary<string, object> metadata)
     {
         Message = message ?? throw new ArgumentNullException(nameof(message));
@@ -50,7 +42,7 @@ public sealed class Error : IError
     /// <summary>
     /// Error with a dictionary of error details
     /// </summary>
-    /// <param name="metadata"> Error details </param>
+    /// <param name="metadata">Error details</param>
     public Error(IReadOnlyDictionary<string, object> metadata)
     {
         if (metadata == null)
@@ -65,8 +57,8 @@ public sealed class Error : IError
     /// key - element with the error
     /// value - description of the error reason in the element
     /// </summary>
-    /// <param name="key"> Element with the error </param>
-    /// <param name="value"> Description of the error reason </param>
+    /// <param name="key">Element with the error</param>
+    /// <param name="value">Description of the error reason</param>
     public Error(string key, object value)
     {
         Message = $"{key}: {value}";

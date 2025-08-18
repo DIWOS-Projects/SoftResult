@@ -23,6 +23,5 @@ internal sealed class ApiResponseDto<T>
     public T? Value { get; set; }
 
     [JsonPropertyName("errors")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public IReadOnlyCollection<IError>? Errors { get; set; }
+    public IReadOnlyCollection<IError> Errors { get; set; } = [];
 }

@@ -33,12 +33,12 @@ public static class ResultExtensions
     /// <summary>
     /// Returns a "Bad Request" result with an error object
     /// </summary>
-    public static IResult<T> BadRequest<T>(Error error) => Result<T>.BadRequest(error);
+    public static IResult<T> BadRequest<T>(IError error) => Result<T>.BadRequest(error);
 
     /// <summary>
     /// Returns an error result (HTTP 400 Bad Request) with a collection of errors
     /// </summary>
-    public static IResult<T> BadRequest<T>(IEnumerable<Error> errorsList) => Result<T>.BadRequest(errorsList);
+    public static IResult<T> BadRequest<T>(IEnumerable<IError> errorsList) => Result<T>.BadRequest(errorsList);
 
     /// <summary>
     /// Returns an error result (HTTP 400 Bad Request) with a message, key, and additional data value
@@ -53,12 +53,12 @@ public static class ResultExtensions
     /// <summary>
     /// Returns a "not found" result (HTTP 404 Not Found) with the provided error
     /// </summary>
-    public static IResult<T> NotFound<T>(Error error) => Result<T>.NotFound(error);
+    public static IResult<T> NotFound<T>(IError error) => Result<T>.NotFound(error);
 
     /// <summary>
     /// Returns a "not found" result (HTTP 404 Not Found) with a collection of errors
     /// </summary>
-    public static IResult<T> NotFound<T>(IEnumerable<Error> errorsList) => Result<T>.NotFound(errorsList);
+    public static IResult<T> NotFound<T>(IEnumerable<IError> errorsList) => Result<T>.NotFound(errorsList);
 
     /// <summary>
     /// Returns an error result (HTTP 404 Not Found) with a message, key, and additional data value
@@ -97,12 +97,12 @@ public static class ResultExtensions
     /// <summary>
     /// Asynchronously returns a "Bad Request" result with an error object
     /// </summary>
-    public static Task<IResult<T>> BadRequestAsync<T>(Error error) => Result<T>.BadRequestAsync(error);
+    public static Task<IResult<T>> BadRequestAsync<T>(IError error) => Result<T>.BadRequestAsync(error);
 
     /// <summary>
     /// Asynchronously returns an error result (HTTP 400 Bad Request) with a collection of errors
     /// </summary>
-    public static Task<IResult<T>> BadRequestAsync<T>(IEnumerable<Error> errorsList) => Result<T>.BadRequestAsync(errorsList);
+    public static Task<IResult<T>> BadRequestAsync<T>(IEnumerable<IError> errorsList) => Result<T>.BadRequestAsync(errorsList);
 
     /// <summary>
     /// Asynchronously returns an error result (HTTP 400 Bad Request) with a message, key, and additional data value
@@ -117,12 +117,12 @@ public static class ResultExtensions
     /// <summary>
     /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with the provided error
     /// </summary>
-    public static Task<IResult<T>> NotFoundAsync<T>(Error error) => Result<T>.NotFoundAsync(error);
+    public static Task<IResult<T>> NotFoundAsync<T>(IError error) => Result<T>.NotFoundAsync(error);
 
     /// <summary>
     /// Asynchronously returns a "not found" result (HTTP 404 Not Found) with a collection of errors
     /// </summary>
-    public static Task<IResult<T>> NotFoundAsync<T>(IEnumerable<Error> errorsList) => Result<T>.NotFoundAsync(errorsList);
+    public static Task<IResult<T>> NotFoundAsync<T>(IEnumerable<IError> errorsList) => Result<T>.NotFoundAsync(errorsList);
 
     /// <summary>
     /// Asynchronously returns an error result (HTTP 404 Not Found) with a message, key, and additional data value

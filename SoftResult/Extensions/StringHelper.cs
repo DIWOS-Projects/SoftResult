@@ -10,8 +10,8 @@ internal static class StringHelper
     /// <summary>
     /// Converts messages from a Result object into a single string
     /// </summary>
-    /// <param name="result"> The Result object containing a collection of messages </param>
-    /// <returns> A string containing all messages separated by a new line </returns>
+    /// <param name="result">The Result object containing a collection of messages</param>
+    /// <returns>A string containing all messages separated by a new line</returns>
     public static string MessagesToString<T>(this IResult<T> result)
     {
         if (result == null)
@@ -28,9 +28,9 @@ internal static class StringHelper
     /// <summary>
     /// Converts a dictionary of metadata into a string, combining keys and values with a new line separator
     /// </summary>
-    /// <param name="value"> Metadata dictionary. </param>
-    /// <returns> A string containing keys and values of metadata separated by a new line. </returns>
-    /// <exception cref="ArgumentException"> Thrown if the metadata dictionary is empty. </exception>
+    /// <param name="value">Metadata dictionary.</param>
+    /// <returns>A string containing keys and values of metadata separated by a new line.</returns>
+    /// <exception cref="ArgumentException">Thrown if the metadata dictionary is empty. </exception>
     public static string MessagesToString(this IReadOnlyDictionary<string, object> value)
     {
         if (value == null)

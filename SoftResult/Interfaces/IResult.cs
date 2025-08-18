@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SoftResult.Enums;
-using SoftResult.Response;
 
 namespace SoftResult.Interfaces;
 
@@ -22,7 +21,7 @@ public interface IResult : IActionResult
     /// <summary>
     /// Errors
     /// </summary>
-    public IReadOnlyCollection<Error>? Errors { get; init; }
+    public IReadOnlyCollection<IError> Errors { get; init; }
 
     /// <summary>
     /// Status
@@ -31,7 +30,7 @@ public interface IResult : IActionResult
     {
         get
         {
-            return Errors == null || Errors.Count == 0;
+            return Errors.Count == 0;
         }
     }
 }
