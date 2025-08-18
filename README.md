@@ -42,12 +42,12 @@ mkdir /LocalNugget
 
 ### **📤 Publish the Package to a Local Source**
 ```shell
-dotnet nuget push .\soft-result\bin\Release\soft-result.1.5.9.1-alpha.1.nupkg --source C:\LocalNugget\
+dotnet nuget push .\soft-result\bin\Release\soft-result.1.5.9.1-alpha.2.nupkg --source C:\LocalNugget\
 ```
 
 ### **🌐 Publish the Package to a Remote Source**
 ```shell
-dotnet nuget push .\soft-result\bin\Release\soft-result.1.5.9.1-alpha.1.nupkg --api-key YOUR_API_KEY --source https://packages.salyk.kg/nuget
+dotnet nuget push .\soft-result\bin\Release\soft-result.1.5.9.1-alpha.2.nupkg --api-key YOUR_API_KEY --source https://packages.salyk.kg/nuget
 ```
 
 ### **➕ Add a Local Source to NuGet**
@@ -232,7 +232,7 @@ The controller can directly return the result from the `Query` since `IResult` i
 
 ## 📦 **Package Versioning**
 
-- **soft-result: 1.5.9.1-alpha.1**  
+- **soft-result: 1.5.9.1-alpha.2**  
   - **1:** Major version.  
   - **5:** Last digit of the year — 2024.  
   - **9:** .NET version.  

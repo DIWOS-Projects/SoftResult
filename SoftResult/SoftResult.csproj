@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <RootNamespace>SoftResult</RootNamespace>
-        <Version>1.5.9.1-alpha.1</Version>
+        <Version>1.5.9.1-alpha.2</Version>
         <Authors>Artem Konkin, Ekaterina Volodina, Anastasiya Lugovaya, Adilet Akunov</Authors>
         <Company>Salyk Service</Company>
         <Description>Библиотека для обработки результатов операций с удобным API</Description>
@@ -25,15 +25,9 @@
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReleaseNotes>
-        
+
             ✨ Новые возможности (Features)
 
-            * Неявные преобразования (Implicit Operators): Добавлена возможность неявного преобразования
-            типов, что значительно упрощает код.
-            * Теперь можно возвращать объект T напрямую, и он будет автоматически обернут в
-            Result.Ok(value).
-            * Добавлена поддержка преобразования из стандартных OkObjectResult, BadRequestObjectResult и
-            NotFoundObjectResult в IResult, что улучшает совместимость с нативным ASP.NET Core.
             * Поддержка асинхронных потоков: Добавлены перегрузки Ok() и OkAsync() для работы с
             IAsyncEnumerable, что позволяет эффективно обрабатывать большие наборы данных без полной
             загрузки в память.
@@ -50,10 +44,10 @@
 
             * Модернизация Result: Из класса убрано ключевое слово required, что упрощает инициализацию
             объектов.
-            
+
             Это обновление делает библиотеку SoftResult еще более мощным инструментом для построения
             стандартизированных и эффективных API.
-            
+
         </PackageReleaseNotes>
         <RunPostBuildEvent>Always</RunPostBuildEvent>
     </PropertyGroup>

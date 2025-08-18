@@ -23,7 +23,7 @@ public sealed class Error : IError
     /// </summary>
     /// <param name="message">The error message</param>
     /// <param name="metadata">The dictionary of error details</param>
-    internal Error(string message, IReadOnlyDictionary<string, object>? metadata = null)
+    public Error(string message, IReadOnlyDictionary<string, object>? metadata = null)
     {
         Message = message;
         Metadata = metadata ?? new Dictionary<string, object>().AsReadOnly();
