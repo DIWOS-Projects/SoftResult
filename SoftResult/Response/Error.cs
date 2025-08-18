@@ -4,89 +4,77 @@ using SoftResult.Interfaces;
 namespace SoftResult.Response;
 
 /// <summary>
-/// Represents a standardized error object.
+/// Error
 /// </summary>
 public sealed class Error : IError
 {
     /// <summary>
-    /// Gets the error message
+    /// Error message
     /// </summary>
-    public string Message { get; private init; }
+    public string Message { get; init; }
 
     /// <summary>
-    /// Gets the dictionary of error details, containing the element with the error and the reason
+    /// Dictionary of error details
+    /// element with the error, reason for the error
     /// </summary>
-    public IReadOnlyDictionary<string, object> Metadata { get; init; }
+    public IReadOnlyDictionary<string, object> Metadata { get; init; } = new Dictionary<string, object>().AsReadOnly();
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Error"/> class with a message and metadata
+    /// Base error case
     /// </summary>
-    /// <param name="message">The error message</param>
-    /// <param name="metadata">The dictionary of error details</param>
-    public Error(string message, IReadOnlyDictionary<string, object>? metadata = null)
+    public Error()
+    {
+        Message = "Error";
+    }
+
+    /// <summary>
+    /// Error with specified text
+    /// </summary>
+    /// <param name="message"> Error message </param>
+    public Error(string message)
     {
         Message = message;
-        Metadata = metadata ?? new Dictionary<string, object>().AsReadOnly();
     }
 
     /// <summary>
-    /// Creates a new error with a default message
+    /// Error with specified text and metadata
     /// </summary>
-    /// <returns>A new <see cref="IError"/> instance</returns>
-    public static IError Create()
+    /// <param name="message"> Error message </param>
+    /// <param name="metadata"> Error details </param>
+    public Error(string message, IReadOnlyDictionary<string, object> metadata)
     {
-        return new Error("Error");
+        Message = message ?? throw new ArgumentNullException(nameof(message));
+        Metadata = metadata ?? throw new ArgumentNullException(nameof(metadata));
     }
 
     /// <summary>
-    /// Creates a new error with the specified message
+    /// Error with a dictionary of error details
     /// </summary>
-    /// <param name="message">The error message</param>
-    /// <returns>A new <see cref="IError"/> instance</returns>
-    public static IError Create(string message)
+    /// <param name="metadata"> Error details </param>
+    public Error(IReadOnlyDictionary<string, object> metadata)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(message);
-        return new Error(message);
+        if (metadata == null)
+            throw new ArgumentNullException(nameof(metadata), "Metadata cannot be null");
+
+        Message = metadata.MessagesToString();
+        Metadata = metadata;
     }
 
     /// <summary>
-    /// Creates a new error with the specified message and metadata
+    /// Error with an error detail by key-value pair
+    /// key - element with the error
+    /// value - description of the error reason in the element
     /// </summary>
-    /// <param name="message">The error message</param>
-    /// <param name="metadata">The dictionary of error details</param>
-    /// <returns>A new <see cref="IError"/> instance</returns>
-    public static IError Create(string message, IReadOnlyDictionary<string, object> metadata)
+    /// <param name="key"> Element with the error </param>
+    /// <param name="value"> Description of the error reason </param>
+    public Error(string key, object value)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(message);
-        ArgumentNullException.ThrowIfNull(metadata);
-        return new Error(message, metadata);
-    }
-
-    /// <summary>
-    /// Creates a new error from a dictionary of metadata. The message is constructed from the metadata
-    /// </summary>
-    /// <param name="metadata">The dictionary of error details</param>
-    /// <returns>A new <see cref="IError"/> instance</returns>
-    public static IError FromMetadata(IReadOnlyDictionary<string, object> metadata)
-    {
-        ArgumentNullException.ThrowIfNull(metadata);
-        var message = metadata.MessagesToString();
-        return new Error(message, metadata);
-    }
-
-    /// <summary>
-    /// Creates a new error from a key-value pair, where the key is the element with the error
-    /// and the value is the description of the error reason
-    /// </summary>
-    /// <param name="key">The element with the error</param>
-    /// <param name="value">The description of the error reason</param>
-    /// <returns>A new <see cref="IError"/> instance</returns>
-    public static IError FromKeyValue(string key, object value)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(key);
-        ArgumentNullException.ThrowIfNull(value);
-        var message = $"{key}: {value}";
-        var metadata = new Dictionary<string, object> { { key, value } }.AsReadOnly();
-        return new Error(message, metadata);
+        Message = $"{key}: {value}";
+        Metadata = new Dictionary<string, object>
+        {
+            {
+                key, value
+            }
+        };
     }
 }

@@ -44,7 +44,7 @@ public sealed class Result<T> : IResult<T>
     /// <summary>
     /// List of errors
     /// </summary>
-    public IReadOnlyCollection<IError>? Errors { get; init; }
+    public IReadOnlyCollection<Error>? Errors { get; init; }
 
     /// <summary>
     /// Status
@@ -111,7 +111,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="error">Error object</param>
     /// <returns>Result with a 400 Bad Request code</returns>
-    public static IResult<T> BadRequest(IError error) => new Result<T>
+    public static IResult<T> BadRequest(Error error) => new Result<T>
     {
         IsSuccess = false,
         StatusCode = StatusCodes.Status400BadRequest,
@@ -124,7 +124,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="errorsList">List of errors</param>
     /// <returns>Result with a 400 Bad Request code</returns>
-    public static IResult<T> BadRequest(IEnumerable<IError> errorsList)
+    public static IResult<T> BadRequest(IEnumerable<Error> errorsList)
     {
         if (errorsList == null)
             throw new ArgumentException("The list of errors cannot be null", nameof(errorsList));
@@ -180,7 +180,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="error">Error object</param>
     /// <returns>Result with a 404 Not Found code</returns>
-    public static IResult<T> NotFound(IError error) => new Result<T>
+    public static IResult<T> NotFound(Error error) => new Result<T>
     {
         IsSuccess = false,
         StatusCode = StatusCodes.Status404NotFound,
@@ -193,7 +193,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="errorsList">List of errors</param>
     /// <returns>Result with a 404 Not Found code</returns>
-    public static IResult<T> NotFound(IEnumerable<IError> errorsList)
+    public static IResult<T> NotFound(IEnumerable<Error> errorsList)
     {
         if (errorsList == null)
             throw new ArgumentException("The list of errors cannot be null", nameof(errorsList));
@@ -284,7 +284,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="error">Error object</param>
     /// <returns>Task containing a result with a 400 Bad Request code</returns>
-    public static Task<IResult<T>> BadRequestAsync(IError error)
+    public static Task<IResult<T>> BadRequestAsync(Error error)
         => Task.FromResult(BadRequest(error));
 
     /// <summary>
@@ -292,7 +292,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="errorsList">List of errors</param>
     /// <returns>Task containing a result with a 400 Bad Request code</returns>
-    public static Task<IResult<T>> BadRequestAsync(IEnumerable<IError> errorsList)
+    public static Task<IResult<T>> BadRequestAsync(IEnumerable<Error> errorsList)
         => Task.FromResult(BadRequest(errorsList));
 
     /// <summary>
@@ -318,7 +318,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="error">Error object</param>
     /// <returns>Task containing a result with a 404 Not Found code</returns>
-    public static Task<IResult<T>> NotFoundAsync(IError error)
+    public static Task<IResult<T>> NotFoundAsync(Error error)
         => Task.FromResult(NotFound(error));
 
     /// <summary>
@@ -326,7 +326,7 @@ public sealed class Result<T> : IResult<T>
     /// </summary>
     /// <param name="errorsList">List of errors</param>
     /// <returns>Task containing a result with a 404 Not Found code</returns>
-    public static Task<IResult<T>> NotFoundAsync(IEnumerable<IError> errorsList)
+    public static Task<IResult<T>> NotFoundAsync(IEnumerable<Error> errorsList)
         => Task.FromResult(NotFound(errorsList));
 
     /// <summary>
