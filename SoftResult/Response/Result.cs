@@ -368,6 +368,7 @@ public sealed class Result<T> : IResult<T>
                 IsSuccess,
                 Locale,
                 Messages,
+                StatusCode,
                 Value,
                 Errors
             }, _jsonSerializerOptions);
