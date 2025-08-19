@@ -358,18 +358,26 @@ public sealed class Result<T> : IResult<T>
     /// <returns>Asynchronous task</returns>
     public async Task ExecuteResultAsync(ActionContext context)
     {
-        context.HttpContext.Response.StatusCode = StatusCode;
-        context.HttpContext.Response.ContentType = "application/json";
-
-        var responseDto = new ApiResponseDto<T>
+        try
         {
-            IsSuccess = IsSuccess,
-            Locale = Locale,
-            Messages = Messages,
-            Value = Value,
-            Errors = Errors
-        };
+            context.HttpContext.Response.StatusCode = StatusCode;
+            context.HttpContext.Response.ContentType = "application/json";
 
-        await context.HttpContext.Response.WriteAsJsonAsync(responseDto, _jsonSerializerOptions, context.HttpContext.RequestAborted);
+            var json = JsonSerializer.Serialize(new
+            {
+                IsSuccess,
+                Locale,
+                Messages,
+                Value,
+                Errors
+            }, _jsonSerializerOptions);
+
+            await context.HttpContext.Response.WriteAsync(json);
+        }
+        catch (JsonException ex)
+        {
+            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.HttpContext.Response.WriteAsync(JsonSerializer.Serialize(new { error = "Serialization error: " + ex.Message }));
+        }
     }
 }
