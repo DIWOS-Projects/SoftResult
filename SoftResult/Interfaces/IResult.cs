@@ -15,6 +15,11 @@ public interface IResult : IActionResult
     public Locale Locale { get; set; }
 
     /// <summary>
+    /// Response code
+    /// </summary>
+    public int StatusCode { get; set; }
+
+    /// <summary>
     /// Messages
     /// </summary>
     public IReadOnlyCollection<string> Messages { get; set; }

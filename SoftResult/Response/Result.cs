@@ -34,7 +34,7 @@ public sealed class Result<T> : IResult<T>
     /// <summary>
     /// Response code
     /// </summary>
-    private int StatusCode { get; set; }
+    public int StatusCode { get; set; }
 
     /// <summary>
     /// List of messages
