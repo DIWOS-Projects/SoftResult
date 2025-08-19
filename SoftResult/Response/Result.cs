@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using SoftResult.Enums;
 using SoftResult.Interfaces;
 using System.Text.Json;
@@ -44,7 +44,7 @@ public sealed class Result<T> : IResult<T>
     /// <summary>
     /// List of errors
     /// </summary>
-    public IReadOnlyCollection<IError> Errors { get; set; } = [];
+    public IReadOnlyCollection<Error> Errors { get; set; } = [];
 
     /// <summary>
     /// Status
@@ -116,7 +116,7 @@ public sealed class Result<T> : IResult<T>
         IsSuccess = false,
         StatusCode = StatusCodes.Status400BadRequest,
         Messages = [error.Message],
-        Errors = [error]
+        Errors = [error is Error e ? e : new Error(error.Message, error.Metadata)]
     };
 
     /// <summary>
@@ -141,6 +141,8 @@ public sealed class Result<T> : IResult<T>
                 .Select(e => e.Message)
                 .ToList(),
             Errors = dataList
+                .Select(e => e is Error er ? er : new Error(e.Message, e.Metadata))
+                .ToList()
         };
     }
 
@@ -185,7 +187,7 @@ public sealed class Result<T> : IResult<T>
         IsSuccess = false,
         StatusCode = StatusCodes.Status404NotFound,
         Messages = [error.Message],
-        Errors = [error]
+        Errors = [error is Error e ? e : new Error(error.Message, error.Metadata)]
     };
 
     /// <summary>
@@ -210,6 +212,8 @@ public sealed class Result<T> : IResult<T>
                 .Select(e => e.Message)
                 .ToList(),
             Errors = dataList
+                .Select(e => e is Error er ? er : new Error(e.Message, e.Metadata))
+                .ToList()
         };
     }
 

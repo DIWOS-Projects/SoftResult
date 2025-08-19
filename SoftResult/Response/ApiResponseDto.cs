@@ -23,5 +23,5 @@ internal sealed class ApiResponseDto<T>
     public T? Value { get; set; }
 
     [JsonPropertyName("errors")]
-    public IReadOnlyCollection<IError> Errors { get; set; } = [];
+    public IReadOnlyCollection<Error> Errors { get; set; } = [];
 }
