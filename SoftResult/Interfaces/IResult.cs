@@ -16,12 +16,12 @@ public interface IResult : IActionResult
     /// <summary>
     /// Messages
     /// </summary>
-    public IReadOnlyCollection<string> Messages { get; init; }
+    public IReadOnlyCollection<string> Messages { get; set; }
 
     /// <summary>
     /// Errors
     /// </summary>
-    public IReadOnlyCollection<IError> Errors { get; init; }
+    public IReadOnlyCollection<IError> Errors { get; set; }
 
     /// <summary>
     /// Status

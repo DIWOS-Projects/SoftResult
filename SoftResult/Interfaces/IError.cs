@@ -14,5 +14,5 @@ public interface IError
     /// Dictionary of error details
     /// element with the error, reason for the error
     /// </summary>
-    IReadOnlyDictionary<string, object> Metadata { get; init; }
+    IReadOnlyDictionary<string, object> Metadata { get; set; }
 }

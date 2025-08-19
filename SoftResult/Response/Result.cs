@@ -34,22 +34,22 @@ public sealed class Result<T> : IResult<T>
     /// <summary>
     /// Response code
     /// </summary>
-    private int StatusCode { get; init; }
+    private int StatusCode { get; set; }
 
     /// <summary>
     /// List of messages
     /// </summary>
-    public IReadOnlyCollection<string> Messages { get; init; } = [];
+    public IReadOnlyCollection<string> Messages { get; set; } = [];
 
     /// <summary>
     /// List of errors
     /// </summary>
-    public IReadOnlyCollection<IError> Errors { get; init; } = [];
+    public IReadOnlyCollection<IError> Errors { get; set; } = [];
 
     /// <summary>
     /// Status
     /// </summary>
-    public bool IsSuccess { get; private init; }
+    public bool IsSuccess { get; set; }
 
     // Синхронные методы
 

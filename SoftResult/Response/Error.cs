@@ -11,13 +11,13 @@ public sealed class Error : IError
     /// <summary>
     /// Error message
     /// </summary>
-    public string Message { get; init; }
+    public string Message { get; set; }
 
     /// <summary>
     /// Dictionary of error details
     /// element with the error, reason for the error
     /// </summary>
-    public IReadOnlyDictionary<string, object> Metadata { get; init; } = new Dictionary<string, object>().AsReadOnly();
+    public IReadOnlyDictionary<string, object> Metadata { get; set; } = new Dictionary<string, object>().AsReadOnly();
 
     /// <summary>
     /// Error with specified text
