@@ -22,6 +22,14 @@ public sealed class Error : IError
     /// <summary>
     /// Error with specified text
     /// </summary>
+    public Error()
+    {
+        Message = "";
+    }
+
+    /// <summary>
+    /// Error with specified text
+    /// </summary>
     /// <param name="message">Error message</param>
     public Error(string message)
     {
