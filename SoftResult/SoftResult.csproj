@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+        <TargetFramework>net10.0</TargetFramework>
         <RootNamespace>SoftResult</RootNamespace>
-        <Version>1.5.9.2</Version>
+        <Version>1.5.10.1</Version>
         <Authors>Artem Konkin, Ekaterina Volodina, Anastasiya Lugovaya, Adilet Akunov</Authors>
         <Company>Salyk Service</Company>
         <Description>Библиотека для обработки результатов операций с удобным API</Description>
@@ -28,25 +28,7 @@
 
             ✨ Новые возможности (Features)
 
-            * Поддержка асинхронных потоков: Добавлены перегрузки Ok() и OkAsync() для работы с
-            IAsyncEnumerable, что позволяет эффективно обрабатывать большие наборы данных без полной
-            загрузки в память.
-
-            🚀 Улучшения (Improvements)
-
-            * Оптимизация сериализации: Процесс сериализации IResult в JSON был оптимизирован. Теперь
-            используется статически кешированный экземпляр JsonSerializerOptions и специализированный DTO
-            (ApiResponseDto), что снижает нагрузку на GC и повышает производительность.
-            * Улучшен API для `Error`: Конструкторы в классе Error были заменены на статические фабричные
-            методы (Create, FromMetadata и др.). Это делает создание ошибок более явным и читаемым.
-
-            🔧 Рефакторинг (Refactoring)
-
-            * Модернизация Result: Из класса убрано ключевое слово required, что упрощает инициализацию
-            объектов.
-
-            Это обновление делает библиотеку SoftResult еще более мощным инструментом для построения
-            стандартизированных и эффективных API.
+            * Обновление до .NET 10.0
 
         </PackageReleaseNotes>
         <RunPostBuildEvent>Always</RunPostBuildEvent>

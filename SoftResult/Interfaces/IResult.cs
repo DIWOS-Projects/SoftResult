@@ -32,13 +32,7 @@ public interface IResult : IActionResult
     /// <summary>
     /// Status
     /// </summary>
-    public bool IsSuccess
-    {
-        get
-        {
-            return Errors.Count == 0;
-        }
-    }
+    public bool IsSuccess => Errors.Count == 0;
 }
 
 /// <summary>

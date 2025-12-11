@@ -1,5 +1,4 @@
 using SoftResult.Enums;
-using SoftResult.Interfaces;
 using System.Text.Json.Serialization;
 
 namespace SoftResult.Response;
